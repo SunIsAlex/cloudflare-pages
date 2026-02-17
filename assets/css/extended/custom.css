@@ -1,0 +1,46 @@
+[data-theme="light"] body#top {
+    background: radial-gradient(circle at 30% 20%, #e6f0ff 0%, #f0f4ff 40%, #ffffff 100%);
+    background-attachment: fixed;
+}
+
+[data-theme="dark"] body#top {
+    background: radial-gradient(circle at 30% 20%, #0d1b2a 0%, #1b263b 40%, #415a77 100%);
+}
+.header {
+    background-color: rgba(var(--theme-rgb), 0.75) !important;  /* 75% 不透明度，基于主题背景色 */
+    backdrop-filter: blur(10px);               /* 模糊半径 10px，调大更模糊 */
+    -webkit-backdrop-filter: blur(10px);       /* Safari 支持 */
+    border-bottom: 5px solid rgba(var(--border-rgb), 0.3);  /* 淡边框，可选 */
+    position: sticky !important;
+    top: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease;  /* 平滑隐藏/显示 */
+}
+/* 只针对显示公式（display math）启用滚动 */
+.post-content mjx-container[display="true"] {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+/* 行内公式强制不显示滚动条（即使有 auto） */
+.post-content mjx-container[display="false"] {
+  overflow-x: hidden !important;   /* 或 visible，根据需要 */
+  overflow-y: hidden !important;
+  max-width: 100%;
+}
+
+/* 可选：隐藏滚动条本身的轨道（美观，但不影响功能） */
+.post-content mjx-container[display="true"]::-webkit-scrollbar {
+  height: 8px;                    /* 调小高度 */
+}
+
+.post-content mjx-container[display="true"]::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.3);    /* 半透明或自定义颜色 */
+  border-radius: 4px;
+}
+
+.post-content mjx-container[display="true"]::-webkit-scrollbar-track {
+  background: transparent;        /* 轨道透明，视觉上更干净 */
+}

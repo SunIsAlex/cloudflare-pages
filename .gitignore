@@ -1,0 +1,8 @@
+# 忽略 Hugo 生成的靜態文件夾
+/public/
+
+# 忽略 Hugo 的資源緩存文件夾（通常在本地預覽時生成）
+/resources/_gen/
+
+# 忽略 Hugo 的鎖文件（標誌 Hugo 是否正在運行）
+.hugo_build.lock

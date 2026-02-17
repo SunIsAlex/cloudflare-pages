@@ -1,0 +1,72 @@
+baseURL = 'https://alexsun.one'
+languageCode = 'en-us'
+title = "Alex's site"
+theme = 'hugo-PaperMod'
+[taxonomies]
+     category = 'categories'
+     tag = 'tags'
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+    style = "monokai"          # 可换成 dracula, github-dark, solarized-dark 等
+[menu]
+    [[menu.main]]
+        name = 'Home Page'
+        url = '/'
+        weight = 1
+    [[menu.main]]
+        name = 'Categories'
+        url  = '/categories'
+        weight = 2
+    [[menu.main]]
+        name = 'Tags'
+        url  = '/tags'
+        weight = 3
+    [[menu.main]]
+        name = 'Search'
+        url = '/search'
+        weight = 4
+    #[[menu.main]]
+    #    name = 'Files'
+    #    url = '/files'
+    #    weight = 5
+    #    hasChildren = true
+[params]
+  math = true
+  ShowToc = true
+  ShowCodeCopyButtons = true
+  ShowPostNavLinks = true
+  #ShowWordCount = true
+  #ShowReadingTime = true
+  [params.homeInfoParams]
+	Title = 'AlexSun'
+	content = '*Live free or die*<br>不自由，毋宁死'
+  [[params.socialIcons]]
+	  name = 'BiliBili'
+	  url = 'https://b23.tv/D3Iy4sQ'
+  [[params.socialIcons]]
+	  name = 'Coolapk'
+	  url = 'http://www.coolapk.com/u/14103126'
+  [[params.socialIcons]]
+	  name = 'Zhihu'
+	  url = 'https://www.zhihu.com/people/mei-you-gan-qing-de-ming-ling-shi'
+  [[params.socialIcons]]
+    name = 'GitHub'
+    url = 'https://github.com/SunIsAlex'
+  [params.assets]
+    disableHLJS = true
+[outputs]
+home = ["HTML", "RSS", "JSON"]
