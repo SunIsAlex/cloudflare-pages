@@ -7,13 +7,14 @@ tags : ["Nginx","Hugo","Linux"]
 weight : 1
 ShowToc : true
 ---
-
+<!--
 ### 网站概况：
 
 (通过JS请求[/api/neofetch]得到，每2秒更新)
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code id='stat' class="language"></code></pre></div>
 <script>
     var stat = document.getElementById('stat');
+    var count = 0;
     if(window.location.hostname=='github.alexsun.one'){
         stat.innerHTML = 'Github Pages<br>Repository:https://github.com/SunIsAlex/SunIsAlex.github.io';
     }else{
@@ -25,7 +26,12 @@ ShowToc : true
                 } else if (api_xhr.status === 200) {
                     stat.innerText = api_xhr.response;
                 } else {
+                    if (count === 3){
+                        clearInterval(interval_id);
+                        stat.innerText = '请求失败';
+                    }
                     console.error('请求失败:', api_xhr.status);
+                    count += 1;
                 }
             }
         }
@@ -35,10 +41,10 @@ ShowToc : true
         }
         api_xhr.onreadystatechange = neofetch;
         send_xhr();
-        setInterval(send_xhr,2000);
+        const interval_id = setInterval(send_xhr,2000);
     }
 </script>
-
+-->
 # 规划准备
 
 此站于[清华附中](https://qhfz.edu.cn/)“极智”挑战期间(2026-01-31\~2026-02-06)搭建
