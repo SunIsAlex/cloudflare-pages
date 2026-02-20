@@ -13,56 +13,6 @@
 {{- end }}
 
 <head>
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="/android-chrome-512x512.png" sizes="512x512">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script> /*load MathJax*/
-    MathJax = {
-      tex: {
-        packages: {'[+]': ['mhchem']},
-        displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
-        inlineMath: [['\\(', '\\)']]                  // inline
-      },
-      loader: {
-        load: ['[tex]/mhchem']
-      }
-    };
-    // Hide Header on scroll down, show on scroll up
-// Hide Header on scroll down, show on scroll up
-document.addEventListener('DOMContentLoaded', () => {
-  let lastScrollTop = 0;
-const header = document.querySelector('header.header') || document.querySelector('.header') || document.querySelector('header');
-
-if (!header) {
-    console.warn("Header element not found! Smart hide won't work.");
-} else {
-    const delta = 5;
-    const headerHeight = header.offsetHeight || 60;
-
-    window.addEventListener('scroll', () => {
-        let st = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (Math.abs(lastScrollTop - st) <= delta) return;
-
-        if (st > lastScrollTop && st > headerHeight) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-
-        lastScrollTop = st <= 0 ? 0 : st;
-    }, { passive: true });
-}
-    // 把上面的完整 JS 代码放这里面
-    // ... const header = ... 到 window.addEventListener
-});
-    </script>
     {{- partial "head.html" . }}
 </head>
 

@@ -70,3 +70,6 @@ theme = 'hugo-PaperMod'
     disableHLJS = true
 [outputs]
 home = ["HTML", "RSS", "JSON"]
+
+
+

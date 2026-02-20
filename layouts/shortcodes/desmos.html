@@ -1,0 +1,34 @@
+<div class="desmos-container" id="desmos-{{ .Get "id" | default (printf "calc-%d" (now.Unix)) }}" style="width:100%; height:500px; border:2px solid red;"></div>
+
+<script src="https://www.desmos.com/api/v1.12/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+<script>
+(function() {
+  function initDesmos() {
+    var elt = document.getElementById('desmos-{{ .Get "id" | default (printf "calc-%d" (now.Unix)) }}');
+    if (!elt) return;  // 还没ready，再等等
+
+    var calculator = Desmos.GraphingCalculator(elt, {
+      expressions: true,
+      zoomButtons: true,
+      expressionsTopbar: true
+    });
+
+    calculator.setExpression({ id: 'func', latex: '{{ .Get "func" | default "y=x^2" | safeJS }}' });
+
+    calculator.setMathBounds({
+      left: {{ .Get "xmin" | default -10 }},
+      right: {{ .Get "xmax" | default 10 }},
+      bottom: {{ .Get "ymin" | default -10 }},
+      top: {{ .Get "ymax" | default 10 }}
+    });
+
+    // 可选：如果想调试，加 console.log('Desmos loaded!');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDesmos);
+  } else {
+    initDesmos();  // 已经加载完了，直接跑
+  }
+})();
+</script>

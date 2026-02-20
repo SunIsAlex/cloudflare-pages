@@ -31,11 +31,8 @@
 .social-icons a {
     display: inline-flex;
     padding: 10px;
-    transition: all 0.3s ease;
 }
-.social-icons a:hover {
-    transform: translateY(-5px);
-}
+
 .social-icons a svg {
     height: 26px;
     width: 26px;

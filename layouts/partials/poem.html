@@ -1,0 +1,69 @@
+<blockquote class="poem-container">
+  <p id="poem" class="poem-content">正在加载今日诗词...</p>
+  <p id="origin" class="poem-origin"></p>
+</blockquote>
+
+<style>
+  .poem-container {
+    padding: 1.4em 2em;
+    margin: 2em auto;
+    max-width: 720px;
+    background: #fdfcf8;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
+  }
+ .poem-content {
+  font-style: italic;
+  font-size: 1.18em;           /* 根据容器宽度可调小一点 */
+  line-height: 1.75;
+  margin: 0 0 0.8em 0;
+  
+  white-space: pre-line;       /* 保留原诗的换行，但允许自动折行 */
+  word-wrap: break-word;       /* 旧写法，兼容性好 */
+  overflow-wrap: break-word;   /* 现代写法，优先用这个 */
+  
+  /* 关键：尽量不让一句中间断开 */
+  hyphens: none;               /* 禁用连字符断词（中文基本没影响） */
+  hanging-punctuation: first last;             /* 部分浏览器支持，让标点悬挂 */
+  /* 可选：如果容器很窄，允许在标点后自然断行 */
+  /* 但不要用 break-all，它会把“明月几时有”拆成“明月几时\n有” */
+  /* word-break: normal; */    /* 默认值，中文会尽量在标点处断 */
+}
+  .poem-origin {
+    text-align: right;
+    font-size: 1em;
+    color: #555;
+    margin: 0;
+  }
+</style>
+
+<script>
+(async function() {
+  const poemEl  = document.getElementById('poem');
+  const originEl = document.getElementById('origin');
+
+  try {
+    const res = await fetch('https://v1.jinrishici.com/all.json', {
+      cache: 'no-cache'
+    });
+    
+    if (!res.ok) throw new Error('网络响应异常');
+
+    const data = await res.json();
+
+    // 核心赋值 - 替换掉你原来的 {data.xxx} 写法
+    poemEl.textContent = data.content?.trim() || '（诗句暂不可见）';
+    
+    let author = data.author || '佚名';
+    let title  = data.origin  || '无题';
+
+    originEl.textContent = "—— " + author + "《" + title + "》";
+  } catch (err) {
+    console.warn('诗词加载失败', err);
+    poemEl.style.fontStyle = 'normal';
+    poemEl.textContent = '今日诗词加载失败…';
+    originEl.textContent = '';
+  }
+})();
+</script>
