@@ -1,11 +1,23 @@
-<div class="desmos-container" id="desmos-{{ .Get "id" | default (printf "calc-%d" (now.Unix)) }}" style="width:100%; height:500px; border:2px solid red;"></div>
+<div class="desmos-container" 
+     id="desmos-{{ .Get "id" | default (printf "calc-%d" now.Unix) }}" 
+     style="width:100%; height:500px; border:2px solid #ccc;"></div>
+<pre style="background:#000;color:#0f0;padding:1em;">
+DEBUG OUTPUT:
 
+funcs raw      : {{ .Get "funcs" | jsonify }}
+
+funcs safeJS   : {{ .Get "funcs" | safeJS }}
+
+funcs quoted   : "{{ .Get "funcs" | safeJS }}"
+
+all params     : {{ .Params | jsonify }}
+</pre>
 <script src="https://www.desmos.com/api/v1.12/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
 <script>
 (function() {
   function initDesmos() {
-    var elt = document.getElementById('desmos-{{ .Get "id" | default (printf "calc-%d" (now.Unix)) }}');
-    if (!elt) return;  // 还没ready，再等等
+    var elt = document.getElementById('desmos-{{ .Get "id" | default (printf "calc-%d" now.Unix) }}');
+    if (!elt) return;
 
     var calculator = Desmos.GraphingCalculator(elt, {
       expressions: true,
@@ -13,22 +25,38 @@
       expressionsTopbar: true
     });
 
-    calculator.setExpression({ id: 'func', latex: '{{ .Get "func" | default "y=x^2" | safeJS }}' });
+    // ── 關鍵在這裡 ──
+    var funcsStr = "{{ .Get "funcs" | strings.TrimSpace | safeJS }}";
+    //var funcsStr = {{ .Get "funcs" | default "" | safeJS }};
+    var funcs = funcsStr
+      .split(/[\s\|\,]+/)           // 支持 |   ,   空格  甚至多行
+      .map(s => s.trim())
+      .filter(s => s.length > 0);
 
-    calculator.setMathBounds({
-      left: {{ .Get "xmin" | default -10 }},
-      right: {{ .Get "xmax" | default 10 }},
-      bottom: {{ .Get "ymin" | default -10 }},
-      top: {{ .Get "ymax" | default 10 }}
+    var colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f"];
+
+    funcs.forEach(function(latex, i) {
+      if (latex) {
+        calculator.setExpression({
+          id: 'f' + i,
+          latex: latex,
+          color: colors[i % colors.length]
+        });
+      }
     });
 
-    // 可选：如果想调试，加 console.log('Desmos loaded!');
+    calculator.setMathBounds({
+      left:   {{ .Get "xmin" | default -10 }},
+      right:  {{ .Get "xmax" | default 10 }},
+      bottom: {{ .Get "ymin" | default -10 }},
+      top:    {{ .Get "ymax" | default 10 }}
+    });
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initDesmos);
   } else {
-    initDesmos();  // 已经加载完了，直接跑
+    initDesmos();
   }
 })();
 </script>

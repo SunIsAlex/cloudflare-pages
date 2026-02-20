@@ -4,4 +4,7 @@ draft : false
 title : 'Desmos Test'
 ---
 
-{{< desmos >}}
+{{< desmos 
+  funcs="y=x^3|y=x^2|y=x|y=\sin(x)" 
+  xmin="-8" xmax="8" ymin="-10" ymax="10"
+>}}
