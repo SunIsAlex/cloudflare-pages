@@ -167,3 +167,7 @@
 .markdown-body code {
   font-family: "Maple Mono NF CN", "Cascadia Code", "Consolas", monospace;
 }
+
+.date {
+  color: #f73643;
+}
