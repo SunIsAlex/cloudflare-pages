@@ -1,5 +1,6 @@
 ---
-title: "删错 EFI 分区后 Windows 蓝屏 winload.efi 找不到？一次彻底搞懂并修复"
+weight: 1000
+title: "蓝屏0xc000000e修复"
 date: 2026-02-20
 categories: ["系统修复", "Windows", "UEFI"]
 tags: ["EFI分区", "引导修复", "bcdboot", "蓝屏0xc000000e", "winload.efi"]

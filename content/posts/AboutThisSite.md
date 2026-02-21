@@ -1,10 +1,10 @@
 ---
+weight: 1
 date : '2026-02-02T16:36:28+08:00'
 draft : false
 title : '关于本站'
 categories : ['网站建设','Linux命令']
 tags : ["Nginx","Hugo","Linux"]
-weight : 1
 ShowToc : true
 ---
 <!--

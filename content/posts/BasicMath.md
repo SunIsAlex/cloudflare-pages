@@ -1,4 +1,5 @@
 ---
+weight: 1000
 date : '2026-02-02T15:01:08+08:00'
 draft : true
 title : '基础数学'

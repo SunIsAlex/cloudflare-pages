@@ -1,4 +1,5 @@
 ---
+weight: 1000
 date : '2026-02-03T10:35:29+08:00'
 draft : false
 title : 'Linux常用命令'

@@ -1,4 +1,5 @@
 ---
+weight: 1000
 title: "Hugo"
 date: 2026-01-10
 categories: ["网站建设"]

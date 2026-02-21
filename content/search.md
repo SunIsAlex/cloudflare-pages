@@ -1,4 +1,5 @@
 ---
+weight: 1000
 title: "Search" # in any language you want
 # drafy: false
 layout: "search" # necessary for search
