@@ -1,0 +1,36 @@
+<!-- layouts/shortcodes/term-modal.html 完整版 -->
+
+{{ $term := .Inner | markdownify }}
+{{ $mdPath := .Get "file" | default "" }}
+
+{{ if eq $mdPath "" }}
+  {{ errorf "缺少 file 参数！如 file=\"terms/llm.md\"" }}
+{{ end }}
+
+{{ $fullPath := path.Join .Page.File.Dir $mdPath }}
+{{- $rawContent := "" -}}
+{{- with readFile $fullPath -}}
+  {{- $rawContent = . -}}
+{{- else -}}
+  {{- $rawContent = printf "<p style=\"color: red;\">文件未找到：%s</p>" $fullPath | safeHTML -}}
+{{- end -}}
+
+<!-- 剥离开头的 front matter（--- 到下一个 ---） -->
+{{- $contentWithoutFM := replaceRE "(?s)^---\\n.*?\\n---\\n?" "" $rawContent -}}
+
+{{ $id := printf "term-modal-%s" (md5 $mdPath) }}
+
+
+<span class="term-modal-trigger" data-modal="#{{ $id }}">
+  <span class="term-text">{{ $term }}</span>
+  <span class="term-star">★</span>
+</span>
+
+<div id="{{ $id }}" class="term-modal">
+  <div class="term-modal-content">
+    <span class="term-modal-close">&times;</span>
+    <div class="term-modal-body">
+        {{ $contentWithoutFM | markdownify | safeHTML }}  <!-- fallback -->
+    </div>
+  </div>
+</div>

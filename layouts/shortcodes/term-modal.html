@@ -1,0 +1,35 @@
+{{- $term := .Inner | markdownify -}}
+{{- $mdRelPath := .Get "file" | default "" -}}
+
+{{- if eq $mdRelPath "" -}}
+  {{- errorf "term-modal shortcode 需要 file 参数，例如 file=\"shared/terms/llm.md\"" .Position -}}
+{{- end -}}
+
+{{- $fullPath := path.Join .Page.File.Dir $mdRelPath -}}
+
+{{- $rawContent := "" -}}
+{{- with readFile $fullPath -}}
+  {{- $rawContent = . -}}
+{{- else -}}
+  {{- $rawContent = printf "<p style=\"color: red; font-weight: bold;\">文件未找到：%s</p>" $fullPath | safeHTML -}}
+{{- end -}}
+
+<!-- 去除开头的 front matter（如果存在） -->
+{{- $contentWithoutFM := replaceRE "(?s)^---\\n.*?\\n---\\n?" "" $rawContent -}}
+
+{{- $id := printf "term-modal-%s" (md5 $mdRelPath) -}}
+
+<!-- ... 前面的变量定义不变 ... -->
+
+<!-- 触发器部分写成一行，避免任何空白换行 -->
+<span class="term-modal-trigger" data-modal="#{{ $id }}"><span class="term-text">{{ $term }}<sup class="term-star">★</sup></span></span>
+
+<div id="{{ $id }}" class="term-modal" style="display: none;">
+  <div class="term-modal-content">
+    <span class="term-modal-close">&times;</span>
+    
+    <div class="term-modal-body">
+      {{- $contentWithoutFM | markdownify | safeHTML -}}
+    </div>
+  </div>
+</div>

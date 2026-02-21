@@ -37,6 +37,7 @@
   {{- if .Content }}
   <div class="post-content">
     {{ partialCached "poem.html" . }}
+    {{ partialCached "term_modal.html" . }}
     {{- if not (.Param "disableAnchoredHeadings") }}
     {{- partial "anchored_headings.html" .Content -}}
     {{- else }}{{ .Content }}{{ end }}
