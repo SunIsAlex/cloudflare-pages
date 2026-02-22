@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
       modal = document.createElement('div');
       modal.id = modalId;
       modal.className = 'term-modal';
-      modal.innerHTML = `
-        <div class="term-modal-content">
-          <span class="term-modal-close">&times;</span>
-          <div class="term-modal-body"></div>
-        </div>
-      `;
+	modal.innerHTML = `
+  <span class="term-modal-close">×</span>
+  <div class="term-modal-content">
+    <div class="term-modal-body"></div>
+  </div>
+`;
       document.body.appendChild(modal);
 
       const body = modal.querySelector('.term-modal-body');
