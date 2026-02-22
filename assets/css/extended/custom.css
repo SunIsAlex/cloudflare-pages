@@ -173,12 +173,14 @@
 }
 
 /* term-modal shortcode 样式 - 适配 PaperMod data-theme */
+/* term-modal shortcode 样式 - 适配 PaperMod data-theme */
 
-/* 触发器整体：强制内联，防止换行 */
-/* 强制整体不换行 */
+/* term-modal shortcode 样式 - 适配 PaperMod data-theme */
+
+/* 触发器部分：强制内联，防止换行 */
 .term-modal-trigger {
-  display: inline-flex !important;     /* 用 flex 锁死内部不换行 */
-  align-items: baseline;               /* 文字和上标基线对齐 */
+  display: inline-flex;
+  align-items: baseline;
   white-space: nowrap;
   vertical-align: baseline;
   cursor: pointer;
@@ -193,128 +195,173 @@
   color: var(--link-color, #8ab4f8);
 }
 
-/* 文字部分 */
 .term-text {
   display: inline;
 }
 
-/* 星星作为上标 */
 .term-star {
-  font-size: 0.55em;              /* 非常小，避免占用高度导致换行 */
+  font-size: 0.55em;
   line-height: 1;
-  vertical-align: super;          /* 上标定位 */
-  margin-left: 0.1em;             /* 极小间距，可调 0.05em \~ 0.15em */
+  vertical-align: super;
+  margin-left: 0.1em;
   color: #09408e;
   font-weight: bold;
   pointer-events: none;
-  text-decoration: none !important; /* 避免继承下划线 */
+  text-decoration: none;
 }
 
-/* 防止上标把整体高度拉高 */
 .term-modal-trigger sup {
   font-size: 0.55em;
-  line-height: 0.8;               /* 压缩高度 */
+  line-height: 0.8;
 }
 
-/* Modal 整体 */
+/* === Modal 整体 - 固定全屏，不随滚动 === */
 .term-modal {
   display: none;
   position: fixed;
+  inset: 0;                      /* top:0 left:0 right:0 bottom:0 */
   z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
+  overflow: hidden;              /* 防止 modal 内部滚动影响整体 */
 }
 
-/* Modal 内容框 */
+/* Modal 内容容器 - 可滚动，但不影响 × 位置 */
 .term-modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 1.2rem 1.8rem;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
   position: relative;
+  background-color: #fefefe;
+  margin: 3vh auto;
+  padding: 3.5rem 2.5rem 2rem;   /* 顶部多留空间给固定 × */
+  width: 90vw;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;              /* 内容滚动 */
+  overflow-x: hidden;            /* 防止横向溢出 */
+  border-radius: 12px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
   animation: modalFadeIn 0.3s;
 }
-/*
+
 [data-theme="dark"] .term-modal-content {
-  background-color: #1e1e0e;
-  color: #e0e0ff;
-  border-color: #4a4a6a;
+  background-color: #121212;
+  color: #e0e0e0;
+  border: 1px solid #2a2a2a;
 }
-*/
-[data-theme="dark"] .term-modal-content {
-  background-color: #121212 !important;  /* 知乎常用主背景色 */
-  color: #e0e0e0 !important;
-  border-color: #2a2a2a !important;
-}
+
 .term-modal-body {
+  overscroll-behavior-y: contain;  /* 现代浏览器阻止滚动穿透 */
+  -webkit-overflow-scrolling: touch;  /* iOS 平滑滚动 */
   font-size: 1rem;
   line-height: 1.6;
 }
 
-/* 关闭按钮 */
-.term-modal-close {
-  color: #aaa;
-  float: right;
-  font-size: 1.8rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.term-modal-close:hover,
-.term-modal-close:focus {
-  color: #000;
-  text-decoration: none;
-}
-
-[data-theme="dark"] .term-modal-close:hover,
-[data-theme="dark"] .term-modal-close:focus {
-  color: #fff;
-}
-
-/* 动画 */
-@keyframes modalFadeIn {
-  from {opacity: 0; transform: translateY(-30px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-/* 响应式 */
-@media (max-width: 600px) {
-  .term-modal-content {
-    width: 90%;
-    margin: 20% auto;
-  }
-}
-
-/* loading 或错误提示（如果有） */
-.term-modal-body p[style*="color: red"] {
+/* 强制代码块不溢出 modal */
+.term-modal-content pre,
+.term-modal-content code,
+.term-modal-content .highlight {
+  max-width: 100%;
+  overflow-x: auto;
   margin: 1rem 0;
-  font-weight: bold;
+  border-radius: 6px;
+  padding: 1rem;
 }
-/* 亮色模式下 modal 里的代码块：背景调深一点，文字保持深色，确保可读 */
+
 [data-theme="light"] .term-modal-content pre,
 [data-theme="light"] .term-modal-content code,
 [data-theme="light"] .term-modal-content .highlight {
-  background-color: #f0f2f5 !important;  /* 浅灰背景，对比提升 */
-}
-
-/* 强制代码文字颜色为深灰/黑色（避免太浅） */
-[data-theme="light"] .term-modal-content pre code,
-[data-theme="light"] .term-modal-content .highlight code {
-  color: #1e1e1e !important;           /* 深灰黑，清晰可见 */
+  background-color: #f0f2f5;
+  color: #1e1e1e;
 }
 
 [data-theme="dark"] .term-modal-content pre,
 [data-theme="dark"] .term-modal-content code,
 [data-theme="dark"] .term-modal-content .highlight {
-  background-color: #1e1e1e !important;  /* 比 modal 稍亮一点，层次分明 */
-  color: #d4d4d4 !important;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+
+/* === 关闭按钮 - 固定在视口右上角（不随滚动） === */
+.term-modal-close {
+  position: fixed !important;    /* 关键：fixed 相对于视口 */
+  top: 1.2rem !important;
+  right: 1.2rem !important;
+  z-index: 10001 !important;     /* 高于 modal 和内容 */
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: #888;
+  cursor: pointer;
+  width: 3.2rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .term-modal-close {
+  background: rgba(0, 0, 0, 0.35);
+  color: #555;
+}
+
+[data-theme="dark"] .term-modal-close {
+  background: rgba(255, 255, 255, 0.35);
+  color: #ccc;
+}
+
+.term-modal-close:hover {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.15);
+  transform: scale(1.1);
+}
+
+.term-modal-close:active {
+  transform: scale(0.95);
+}
+
+/* 动画 */
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === 响应式 === */
+@media (max-width: 767px) {
+  .term-modal-content {
+    width: 92vw;
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  .term-modal-close {
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.2rem;
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .term-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .term-modal-content {
+    width: 90vw;
+    max-width: 1200px;
+    max-height: 90vh;
+  }
+
+  .term-modal {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* loading 或错误提示 */
+.term-modal-body p[style*="color: red"] {
+  margin: 1rem 0;
+  font-weight: bold;
 }
