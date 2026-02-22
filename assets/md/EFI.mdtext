@@ -1,0 +1,86 @@
+# EFI 分区（EFI System Partition）简介
+
+EFI 分区是现代电脑使用 UEFI 启动方式时必须存在的一个特殊 FAT32 分区，主要用于存放启动管理器、启动加载程序和相关配置文件。
+
+## 基本信息
+
+- **文件系统**：FAT32（必须是 FAT32，UEFI 规范要求）
+- **推荐大小**：200–300 MB（实际 100 MB 也能用，500 MB 以上也常见）
+- **分区类型（GUID）**：C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+  - 在磁盘管理工具中通常显示为“EFI 系统分区”或“System”
+- **挂载点**（Linux 下常见）：/boot/efi 或 /efi
+- **Windows 下盘符**：通常不分配盘符（隐藏），有时显示为“EFI 系统分区”且无法直接访问
+
+## EFI 分区的主要作用
+
+1. 存放 UEFI 启动加载器（Bootloader）
+   - Windows：bootmgfw.efi、bootmgr.efi 等
+   - Linux：grubx64.efi、shimx64.efi（Secure Boot 时）
+   - macOS：boot.efi
+
+2. 包含 EFI 启动项配置
+   - EFI/BOOT/BOOTX64.EFI（默认启动文件）
+   - EFI/Microsoft/Boot/（Windows 启动文件）
+   - EFI/ubuntu/、EFI/arch/、EFI/fedora/ 等（各发行版）
+
+3. 支持多系统启动
+   - 多个操作系统可以把各自的启动文件放在 EFI 分区内
+   - 通过 UEFI 的启动项菜单（或第三方工具如 rEFInd、Clover、GRUB）选择启动
+
+4. Secure Boot 相关文件
+   - shim.efi、MokManager.efi、密钥证书等
+
+## 常见目录结构示例
+
+```
+EFI/
+├── BOOT/
+│   └── BOOTX64.EFI           # 默认启动文件（fallback）
+├── Microsoft/
+│   └── Boot/
+│       ├── bootmgfw.efi      # Windows Boot Manager
+│       └── BCD               # Boot Configuration Data
+├── ubuntu/
+│   ├── shimx64.efi           # Secure Boot 加载器
+│   └── grubx64.efi
+├── arch/
+│   └── grubx64.efi
+└── refind/
+    └── refind_x64.efi        # 第三方启动管理器示例
+```
+
+## 创建与注意事项
+
+### 推荐大小与创建方式
+- 安装 Windows 时自动创建（通常 100–300 MB）
+- 安装 Linux 时可手动创建，或由安装程序自动分配
+- 建议手动分区时设置为：
+  - 300–500 MB
+  - FAT32
+  - 标记为“boot”、“esp”标志（gdisk 中用 ef00 类型）
+
+### 重要注意事项
+1. **不要格式化、删除、缩小 EFI 分区**  
+   除非你非常清楚自己在做什么，否则会导致系统无法启动。
+
+2. **不要把个人文件放进去**  
+   EFI 分区是系统专用的，存放用户文件可能导致启动项混乱或被系统清理。
+
+3. **备份 EFI 分区**  
+   多系统用户建议定期备份整个 EFI 分区（用 dd、Clonezilla 或直接复制文件夹）。
+
+4. **多硬盘多系统时**  
+   UEFI 启动项是存储在主板 NVRAM 中的，指向某个磁盘的 EFI 分区。换硬盘顺序或重装系统可能导致启动项丢失，需用 efibootmgr 或 bcdedit 修复。
+
+5. **Secure Boot 兼容性**  
+   某些第三方启动管理器（如老版本 Clover）可能与 Secure Boot 不兼容，需关闭 Secure Boot 或使用 shim 方案。
+
+## 常见问题快速定位
+
+- 开机显示“No bootable device” → EFI 分区丢失/损坏/启动项丢失
+- Windows 更新后无法进系统 → BCD 配置损坏
+- Linux 安装后没有 GRUB 菜单 → 未正确安装到 EFI 分区
+- 双系统只显示一个系统 → UEFI 启动顺序错误
+
+简单一句话总结：  
+**EFI 分区是 UEFI 电脑的“启动心脏”，动它要谨慎，丢了它系统就启动不了。**

@@ -1,4 +1,4 @@
-[data-theme="light"] body#top {
+/[data-theme="light"] body#top {
     background: radial-gradient(circle at 30% 20%, #e6f0ff 0%, #f0f4ff 40%, #ffffff 100%);
     background-attachment: fixed;
 }
@@ -109,4 +109,188 @@
 .post-content th:not(:last-child),
 .post-content td:not(:last-child) {
   border-right: 1px solid rgba(var(--border-rgb), 0.25);
+}
+
+
+/* 只改文章正文区域，模仿 blueTex 风格 */
+/* 尽量不影响 header / menu / footer / dark mode 切换逻辑 */
+
+
+/* 标题 - 更重的字重 + 偏深色（不改大小，因为大小由 PaperMod 控制） */
+.post-content h1, .markdown-body h1,
+.post-content h2, .markdown-body h2,
+.post-content h3, .markdown-body h3,
+.post-content h4, .markdown-body h4 {
+  /*color: #0d1b2a;*/                    /* 更深的蓝黑，标题突出 */
+  font-weight: 750;                   /* 接近 LaTeX 粗体感 */
+  border-bottom: none;                /* 如果原主题有下划线可去掉 */
+}
+
+/* 链接 - blue 系 + 下边框 */
+.post-content a,
+.markdown-body a {
+  color: #2563eb;                     /* 靛蓝链接，主强调色 */
+  border-bottom: 1px solid #93c5fd;   /* 浅蓝下划线 */
+  text-decoration: none;
+  transition: border-color 0.12s ease;
+}
+
+.post-content a:hover,
+.markdown-body a:hover {
+  border-bottom-color: #2563eb;
+  color: #1d4ed8;
+}
+
+
+
+/* 引用块 - 蓝边 + 浅蓝背景 */
+.post-content blockquote,
+.markdown-body blockquote {
+  border-left: 4px solid #60a5fa;     /* 亮蓝左边框，blueTex 特征 */
+  background: rgba(96, 165, 250, 0.08);
+  padding: 0.4rem 1.2rem;
+  margin: 1.6rem 0;
+}
+
+
+
+/* 可选：如果想用 blueTex 提到的字体（需自行引入或系统有） */
+.post-content,
+.markdown-body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 代码块字体（blueTex 常用 Maple Mono 或 Cascadia） */
+.post-content pre,
+.markdown-body pre,
+.post-content code,
+.markdown-body code {
+  font-family: "Maple Mono NF CN", "Cascadia Code", "Consolas", monospace;
+}
+
+.date {
+  color: #f73643;
+}
+
+/* term-modal shortcode 样式 - 适配 PaperMod data-theme */
+
+/* 触发器整体：强制内联，防止换行 */
+/* 强制整体不换行 */
+.term-modal-trigger {
+  display: inline !important;     /* 用 flex 锁死内部不换行 */
+  align-items: baseline;               /* 文字和上标基线对齐 */
+  white-space: nowrap;
+  vertical-align: baseline;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(100, 100, 100, 0.4);
+  color: var(--link-color, #09408e);
+}
+
+[data-theme="dark"] .term-modal-trigger {
+  text-decoration-color: rgba(180, 180, 180, 0.35);
+  color: var(--link-color, #8ab4f8);
+}
+
+/* 文字部分 */
+.term-text {
+  display: inline;
+}
+
+/* 星星作为上标 */
+.term-star {
+  font-size: 0.55em;              /* 非常小，避免占用高度导致换行 */
+  line-height: 1;
+  vertical-align: super;          /* 上标定位 */
+  margin-left: 0.1em;             /* 极小间距，可调 0.05em \~ 0.15em */
+  color: #09408e;
+  font-weight: bold;
+  pointer-events: none;
+  text-decoration: none !important; /* 避免继承下划线 */
+}
+
+/* 防止上标把整体高度拉高 */
+.term-modal-trigger sup {
+  font-size: 0.55em;
+  line-height: 0.8;               /* 压缩高度 */
+}
+
+/* Modal 整体 */
+.term-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Modal 内容框 */
+.term-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 1.2rem 1.8rem;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  position: relative;
+  animation: modalFadeIn 0.3s;
+}
+
+[data-theme="dark"] .term-modal-content {
+  background-color: #1e1e2e;
+  color: #e0e0ff;
+  border-color: #4a4a6a;
+}
+
+.term-modal-body {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 关闭按钮 */
+.term-modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.term-modal-close:hover,
+.term-modal-close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+[data-theme="dark"] .term-modal-close:hover,
+[data-theme="dark"] .term-modal-close:focus {
+  color: #fff;
+}
+
+/* 动画 */
+@keyframes modalFadeIn {
+  from {opacity: 0; transform: translateY(-30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* 响应式 */
+@media (max-width: 600px) {
+  .term-modal-content {
+    width: 90%;
+    margin: 20% auto;
+  }
+}
+
+/* loading 或错误提示（如果有） */
+.term-modal-body p[style*="color: red"] {
+  margin: 1rem 0;
+  font-weight: bold;
 }

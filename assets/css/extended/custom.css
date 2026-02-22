@@ -243,13 +243,18 @@
   position: relative;
   animation: modalFadeIn 0.3s;
 }
-
+/*
 [data-theme="dark"] .term-modal-content {
-  background-color: #1e1e2e;
+  background-color: #1e1e0e;
   color: #e0e0ff;
   border-color: #4a4a6a;
 }
-
+*/
+[data-theme="dark"] .term-modal-content {
+  background-color: #121212 !important;  /* 知乎常用主背景色 */
+  color: #e0e0e0 !important;
+  border-color: #2a2a2a !important;
+}
 .term-modal-body {
   font-size: 1rem;
   line-height: 1.6;
@@ -293,4 +298,23 @@
 .term-modal-body p[style*="color: red"] {
   margin: 1rem 0;
   font-weight: bold;
+}
+/* 亮色模式下 modal 里的代码块：背景调深一点，文字保持深色，确保可读 */
+[data-theme="light"] .term-modal-content pre,
+[data-theme="light"] .term-modal-content code,
+[data-theme="light"] .term-modal-content .highlight {
+  background-color: #f0f2f5 !important;  /* 浅灰背景，对比提升 */
+}
+
+/* 强制代码文字颜色为深灰/黑色（避免太浅） */
+[data-theme="light"] .term-modal-content pre code,
+[data-theme="light"] .term-modal-content .highlight code {
+  color: #1e1e1e !important;           /* 深灰黑，清晰可见 */
+}
+
+[data-theme="dark"] .term-modal-content pre,
+[data-theme="dark"] .term-modal-content code,
+[data-theme="dark"] .term-modal-content .highlight {
+  background-color: #1e1e1e !important;  /* 比 modal 稍亮一点，层次分明 */
+  color: #d4d4d4 !important;
 }

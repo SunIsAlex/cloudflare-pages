@@ -9,7 +9,7 @@ draft: false
 
 ## 问题引入
 
-误删 {{< star info="GPT磁盘上的独立启动分区，负责保存UEFI引导文件与BCD数据。" >}}EFI 分区{{< /star >}}或破坏 BCD 后，Windows 启动蓝屏：
+误删 {{< term-modal file="EFI.mdtext" >}}EFI 分区{{< /term-modal >}}或破坏 BCD 后，Windows 启动蓝屏：
 
 - 错误码：0xc000000e 或 0xc0000225
 - 提示：**winload.efi 文件缺失或包含错误**
