@@ -17,11 +17,11 @@
 {{- $rendered := $mdResource.Content | markdownify | safeHTML -}}
 
 <!-- 生成唯一 ID -->
-{{- $id := printf "term-modal-%s" (md5 $filename) -}}
+{{- $id := (md5 $filename) -}}
 
 <!-- 触发器：使用 sup 星星，避免换行问题 -->
 <span class="term-modal-trigger" 
-      data-modal-id="{{ $id }}"
+      id="{{ $id }}"
       data-content="{{ $rendered | base64Encode }}">   <!-- base64 编码传递渲染结果 -->
   <span class="term-text">{{ $term }}<sup class="term-star">★</sup></span>
 </span>
