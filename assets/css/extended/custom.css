@@ -236,7 +236,7 @@
   max-width: 1200px;
   max-height: 90vh;
   overflow-y: auto;              /* 内容滚动 */
-  overflow-x: hidden;            /* 防止横向溢出 */
+  overflow-x: auto;            /* 防止横向溢出 */
   border-radius: 12px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
   animation: modalFadeIn 0.3s;
