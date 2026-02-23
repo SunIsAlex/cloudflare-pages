@@ -9,7 +9,7 @@ draft: false
 
 ## 问题引入
 
-误删 {{< term-modal file="EFI.mdtext" >}}EFI 分区{{< /term-modal >}}或破坏 BCD 后，Windows 启动蓝屏：
+误删 {{< term-modal file="EFI.mdtext" id="EFI" >}}EFI 分区{{< /term-modal >}}或破坏 BCD 后，Windows 启动蓝屏：
 
 - 错误码：0xc000000e 或 0xc0000225
 - 提示：**winload.efi 文件缺失或包含错误**

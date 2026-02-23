@@ -38,9 +38,7 @@
 {{ if .Param "math" }}
     {{- partialCached "math.html" . -}}
 {{ end }}
-
 {{- partialCached "smart_hide.html" . -}}
-{{- partialCached "term_modal.html" . -}}    
 {{- partial "head.html" . }}
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js"></script>

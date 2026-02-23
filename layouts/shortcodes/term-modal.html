@@ -17,7 +17,7 @@
 {{- $rendered := $mdResource.Content | markdownify | safeHTML -}}
 
 <!-- 生成唯一 ID -->
-{{- $id := (md5 $filename) -}}
+{{- $id := .Get "id" | default (md5 $filename) -}}
 
 <!-- 触发器：使用 sup 星星，避免换行问题 -->
 <span class="term-modal-trigger" 
