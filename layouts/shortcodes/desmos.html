@@ -2,7 +2,7 @@
      id="desmos-{{ .Get "id" | default (printf "calc-%d" now.Unix) }}" 
      style="width:100%; height:500px; border:2px solid #ccc;"></div>
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded',function() {
   function initDesmos() {
     if (typeof Desmos === 'undefined' || !Desmos.GraphingCalculator) {
       console.warn('Desmos not loaded yet, retrying...');
@@ -51,5 +51,5 @@
   } else {
     initDesmos();
   }
-})();
+});
 </script>
