@@ -4,6 +4,11 @@
 <script>
 (function() {
   function initDesmos() {
+    if (typeof Desmos === 'undefined' || !Desmos.GraphingCalculator) {
+      console.warn('Desmos not loaded yet, retrying...');
+      setTimeout(initDesmos, 100);  // 或用 requestAnimationFrame
+      return;
+    }
     var elt = document.getElementById('desmos-{{ .Get "id" | default (printf "calc-%d" now.Unix) }}');
     if (!elt) return;
 
