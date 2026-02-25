@@ -39,11 +39,6 @@ theme = 'hugo-PaperMod'
         name = 'Search'
         url = '/search'
         weight = 4
-    #[[menu.main]]
-    #    name = 'Files'
-    #    url = '/files'
-    #    weight = 5
-    #    hasChildren = true
 [params]
   math = true
   ShowToc = true
@@ -72,4 +67,9 @@ theme = 'hugo-PaperMod'
 home = ["HTML", "RSS", "JSON"]
 
 
+[module]
+  [[module.imports]]
+    path = "github.com/SunIsAlex/hugo-notice-papermod"
+  [[module.imports]]
+    path = "hugo-PaperMod"
 

@@ -7,6 +7,9 @@ tags: ["EFI分区", "引导修复", "bcdboot", "蓝屏0xc000000e", "winload.efi"
 draft: false
 ---
 
+{{< notice warning >}}
+在进行本文操作前，应备份个人重要数据
+{{< /notice >}}
 ## 问题引入
 
 误删 {{< term-modal file="EFI.mdtext" id="EFI" >}}EFI 分区{{< /term-modal >}}或破坏 BCD 后，Windows 启动蓝屏：
