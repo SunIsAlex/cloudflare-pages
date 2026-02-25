@@ -62,12 +62,27 @@ title : '泰勒展开'
 2. \((x-1)e^x\ge \cfrac{1}{2}x^2-1(x\ge 0)\)
 
 ## 1线不等式
-1. \(e^{x-1}\ge x\)
-2. \(e^{x}\ge ex\)
-3. \(e^x\ge \cfrac{e}{2}x^2+\cfrac{e}{2}\)
+-  \(e^x\)
+   1. \(e^{x-1}\ge x\)
+   2. \(e^{x}\ge ex\)
+   3. \(e^x\ge \cfrac{e}{2}x^2+\cfrac{e}{2}\)
+-  \(lnx\)
+     1.  \(x^2-x\ge xlnx\ge x-1\ge lnx\ge 1-\cfrac{1}{x}\ge \cfrac{lnx}{x}(x=0,x\gt 0)\)
+     2.  飘带函数
+         - \(\cfrac{1}{2}(x-\cfrac{1}{x})\lt lnx\lt \cfrac{2(x-1)}{x+1},x\lt 1\)
+         - \(\cfrac{1}{2}(x-\cfrac{1}{x})\gt lnx\gt \cfrac{2(x-1)}{x+1},x\gt 1\)
 
-**(广义)自变量**的取值范围不同,直接影响着参数的范围:
+泰勒展开式的**堆砌组合**:
 
+1. \(x\in[0,+\infty),e^x-x-2+cosx\ge0\)
+2. \(e^x\gt lnx+2\)
+
+进行**变量代换**也可以进一步强化不等式:
+
+在\(lnx\lt \cfrac{1}{2}(x-\cfrac{1}{x}),x\gt 0中,带入\sqrt{x},有lnx\lt \sqrt{x}-\cfrac{1}{\sqrt{x}},x\gt 0\)
+{{<notice info>}}
+**自变量**的取值范围不同:
+{{</notice info>}}
 (1)函数\(f(x)=xe^x-x-ln(x)\)的最小值
 
 (2)函数\(f(x)=\cfrac{e^x}{x}-x+ln(x)\)的最小值
