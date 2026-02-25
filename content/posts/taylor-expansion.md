@@ -3,6 +3,8 @@ weight : 1000
 date : '2026-02-23T17:10:57+08:00'
 draft : false
 title : '泰勒展开'
+cover :
+   image: 'https://alexsun-imgbed.pages.dev/file/AgACAgEAAyEGAATlvtEQAAMEaZ7DPsesCdz-WKPDRVt395X2u5sAAp0LaxtpMvlEXE1vShVv74oBAAMCAAN5AAM6BA.jpeg'
 ---
 
 # 泰勒公式
@@ -77,12 +79,14 @@ title : '泰勒展开'
 1. \(x\in[0,+\infty),e^x-x-2+cosx\ge0\)
 2. \(e^x\gt lnx+2\)
 
-进行**变量代换**也可以进一步强化不等式:
+**变量代换**也可以进一步强化不等式:
+
+{{< notice info >}}
+注意**自变量**的取值范围
+{{< /notice >}}
 
 在\(lnx\lt \cfrac{1}{2}(x-\cfrac{1}{x}),x\gt 0中,带入\sqrt{x},有lnx\lt \sqrt{x}-\cfrac{1}{\sqrt{x}},x\gt 0\)
-{{<notice info>}}
-**自变量**的取值范围不同:
-{{</notice info>}}
+
 (1)函数\(f(x)=xe^x-x-ln(x)\)的最小值
 
 (2)函数\(f(x)=\cfrac{e^x}{x}-x+ln(x)\)的最小值

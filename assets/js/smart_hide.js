@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let header = document.querySelector('header.header') || document.querySelector('header') || document.querySelector('.header');
+  let header = document.querySelector('.header');
   if (!header) {
     console.warn("Header not found after fallback selectors");
     return;

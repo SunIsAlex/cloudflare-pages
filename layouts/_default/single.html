@@ -36,6 +36,8 @@
 
   {{- if .Content }}
   <div class="post-content">
+    <!-- Desmos Graphing Calculator Shortcode -->
+    <script defer src="https://www.desmos.com/api/v1.12/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
     {{ partialCached "poem.html" . }}
     {{ partialCached "term_modal.html" . }}
     {{ partialCached "smart_scroll.html" . }}
