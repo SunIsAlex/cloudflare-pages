@@ -51,7 +51,7 @@ cd cloudflare-pages
 ### 初始化模块
 
 ```bash
-git submodule update --init --recursive
+hugo mod get -u
 hugo mod tidy
 ```
 
