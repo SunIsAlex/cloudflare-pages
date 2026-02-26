@@ -1,4 +1,4 @@
-{{ $js := resources.Get "js/smart_hide.js" }}
+{{ $js := resources.Get "js/smart_hide.js"  | minify | fingerprint }}
 {{ if $js }}
   <script defer src="{{ $js.RelPermalink }}"></script>
 {{ end }}
