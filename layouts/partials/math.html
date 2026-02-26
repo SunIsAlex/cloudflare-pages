@@ -1,9 +1,13 @@
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-chtml.js" data-no-instant></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-svg.js" data-no-instant></script>
 <script>
   MathJax = {
+    // 将原先的 chtml 替换为 svg
     tex: {
       displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
       inlineMath: [['\\(', '\\)']]                  // inline
+    },
+    svg: {
+      fontCache: 'global' // 进一步优化：重复的符号只定义一次路径
     }
   };
 </script>
