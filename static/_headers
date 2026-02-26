@@ -1,3 +1,4 @@
 /js/*.js
   Cache-Control: public, max-age=31536000, immutable
-Link: <https://img.alexsun.one>; rel=preconnect
+/*
+  Link: <https://img.alexsun.one>; rel=preconnect
