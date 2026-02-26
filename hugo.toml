@@ -29,15 +29,15 @@ theme = 'hugo-PaperMod'
         weight = 1
     [[menu.main]]
         name = 'Categories'
-        url  = '/categories'
+        url  = '/categories/'
         weight = 2
     [[menu.main]]
         name = 'Tags'
-        url  = '/tags'
+        url  = '/tags/'
         weight = 3
     [[menu.main]]
         name = 'Search'
-        url = '/search'
+        url = '/search/'
         weight = 4
 [params]
   math = true
