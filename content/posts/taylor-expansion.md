@@ -2,7 +2,7 @@
 weight : 1000
 date : '2026-02-23T17:10:57+08:00'
 draft : false
-title : '泰勒展开'
+title : '浅谈泰勒展开与高考数学'
 categories: ['高考数学']
 tags: ['导数']
 cover :

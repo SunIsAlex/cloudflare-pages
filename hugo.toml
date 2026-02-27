@@ -14,7 +14,7 @@ theme = 'hugo-PaperMod'
         enable = true
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
-          inline = [['\(', '\)']]
+          inline = [['\(', '\)'],['$','$']]
   [markup.highlight]
     codeFences = true
     guessSyntax = true
@@ -24,21 +24,25 @@ theme = 'hugo-PaperMod'
     style = "monokai"          # 可换成 dracula, github-dark, solarized-dark 等
 [menu]
     [[menu.main]]
-        name = 'Home Page'
+        name = '🏠Home'
         url = '/'
         weight = 1
     [[menu.main]]
-        name = 'Categories'
-        url  = '/categories/'
+        name = '📂Cat'
+        url = '/categories/'
         weight = 2
     [[menu.main]]
-        name = 'Tags'
-        url  = '/tags/'
+        name = '🏷️Tag'
+        url = '/tags/'
         weight = 3
     [[menu.main]]
-        name = 'Search'
-        url = '/search/'
+        name = '📜Arch'
+        url = '/archive/'
         weight = 4
+    [[menu.main]]
+        name = '🔍'
+        url = '/search/'
+        weight = 5
 [params]
   math = true
   ShowToc = true
