@@ -21,27 +21,13 @@
     <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
     <link rel="icon" type="image/png" href="/android-chrome-512x512.png" sizes="512x512">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <!--{{ if .Param "math" }}
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script> /*load MathJax*/
-    MathJax = {
-      tex: {
-        packages: {'[+]': ['mhchem']},
-        displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
-        inlineMath: [['\\(', '\\)']]                  // inline
-      },
-      loader: {
-        load: ['[tex]/mhchem']
-      }
-    };
-    {{ end }}-->
 {{ if .Param "math" }}
     {{- partialCached "math.html" . -}}
 {{ end }}
 {{- partialCached "smart_hide.html" . -}}
 {{- partial "head.html" . }}
 </head>
-<script src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.min.js"></script>
 <script>
 window.addEventListener('load', () => {
   quicklink.listen(); // 默认预取视口内的链接
