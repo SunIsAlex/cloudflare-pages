@@ -48,6 +48,7 @@ hasCJKLanguage = true
         weight = 5
 [params]
   math = true
+  ShowBreadCrumbs = true
   ShowFullTextContent = false
   ShowToc = true
   ShowCodeCopyButtons = true
