@@ -1,7 +1,10 @@
 baseURL = 'https://alexsun.one'
 languageCode = 'en-us'
 title = "Alex's site"
+
 theme = 'hugo-PaperMod'
+summaryLength = 2
+hasCJKLanguage = true
 [taxonomies]
      category = 'categories'
      tag = 'tags'
@@ -45,6 +48,7 @@ theme = 'hugo-PaperMod'
         weight = 5
 [params]
   math = true
+  ShowFullTextContent = false
   ShowToc = true
   ShowCodeCopyButtons = true
   ShowPostNavLinks = true

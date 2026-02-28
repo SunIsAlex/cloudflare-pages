@@ -1,4 +1,4 @@
-{{ $js := resources.Get "js/smart_scroll.js" }}
+{{ $js := resources.Get "js/smart_scroll.js" | minify | fingerprint | resources.Copy "assets/js/smart_scroll.js" }}
 {{ if $js }}
   <script defer src="{{ $js.RelPermalink }}"></script>
 {{ end }}

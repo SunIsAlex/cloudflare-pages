@@ -5,6 +5,7 @@ draft : false
 categories : ['有机化学']
 tags : ['狄尔斯-阿尔德反应']
 title : '有机化学补全计划1:DA反应'
+summary : "狄尔斯–阿尔德反应，又叫双烯加成反应，是一种有机反应，共轭双烯与取代烯烃反应生成取代环己烯。"
 ---
 
 ![反应路线](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMHaaFfdssW71OzA4V2pf1DiQrcspYAAq8LaxusdwlFY4p0D8b_FnIBAAMCAAN5AAM6BA.jpg)

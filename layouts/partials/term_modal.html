@@ -1,4 +1,4 @@
-{{ $js := resources.Get "js/term_modal.js" | minify | fingerprint}}
+{{ $js := resources.Get "js/term_modal.js" | minify | fingerprint | resources.Copy "assets/js/term_modal.js"}}
 {{ if $js }}
   <script defer src="{{ $js.RelPermalink }}"></script>
 {{ end }}
