@@ -1,5 +1,6 @@
 # cloudflare-pages
 
+[](https://alexsun.one)
 一个基于 Hugo + PaperMod 构建的静态博客站点，部署于 Cloudflare Pages。  
 集成自定义 Shortcodes（术语解释弹窗 + Desmos 计算器嵌入）以及扩展模块 hugo-notice-papermod。
 
