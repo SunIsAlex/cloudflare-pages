@@ -1,17 +1,11 @@
-/[data-theme="light"] body#top {
+[data-theme="light"] body#top {
     background: radial-gradient(circle at 30% 20%, #e6f0ff 0%, #f0f4ff 40%, #ffffff 100%);
     background-attachment: fixed;
 }
 
 [data-theme="dark"] body#top {
 /*    background: radial-gradient(circle at 30% 20%, #0d1b2a 0%, #1b263b 40%, #415a77 100%);*/
-background: radial-gradient(
-    circle at 30% 20%,
-    #0d1117 0%,
-    #0f1e2e 45%,
-    #11263a 75%,
-    #1a365d 100%
-  );
+background: rgb(25,25,25)
 }
 .header {
     background-color: rgba(var(--theme-rgb), 0.75) !important;  /* 75% 不透明度，基于主题背景色 */

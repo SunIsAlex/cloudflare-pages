@@ -8,6 +8,37 @@
     },
     svg: {
       fontCache: 'global' // 进一步优化：重复的符号只定义一次路径
+    },
+    startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        console.log('MathJax loaded and page ready');
+        // 渲染完成后执行缩放逻辑
+        const resizeMath = () => {
+          console.log('Resizing math expressions...');
+          document.querySelectorAll('mjx-container:not([display])').forEach(function(e) {
+            // 重置缩放，防止重复计算
+            e.style.fontSize = '100%';
+            
+            // 获取公式实际宽度和父容器可用宽度
+            const mathWidth = e.offsetWidth;
+            const parentWidth = e.parentNode.offsetWidth;
+            if (mathWidth > parentWidth) {
+              // 计算缩放比例，保留 1-2% 的余量防止精度偏差撑开页面
+              const scale = (parentWidth / mathWidth) * 98; 
+              e.style.fontSize = scale + '%';
+              e.style.display = 'inline-block';
+              e.style.verticalAlign = 'middle';
+            }
+          });
+        };
+
+        resizeMath();
+        // 如果有窗口大小改变，重新计算
+        window.addEventListener('resize', resizeMath);
+      });
     }
+  }
   };
+  
 </script>
