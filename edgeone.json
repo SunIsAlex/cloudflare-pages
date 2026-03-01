@@ -1,5 +1,0 @@
-{
-  "install": "curl -L https://github.com/gohugoio/hugo/releases/download/v0.157.0/hugo_extended_0.157.0_linux-amd64.tar.gz | tar -xz && mv hugo /usr/local/bin/ && apt-get update && apt-get install -y golang",
-  "build": "hugo --gc --minify",
-  "output": "public"
-}
