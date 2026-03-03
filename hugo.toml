@@ -3,7 +3,6 @@ languageCode = 'en-us'
 title = "Alex's site"
 
 theme = 'hugo-PaperMod'
-summaryLength = 2
 hasCJKLanguage = true
 [taxonomies]
      category = 'categories'
@@ -13,6 +12,7 @@ hasCJKLanguage = true
     [markup.goldmark.renderer]
       unsafe = true
     [markup.goldmark.extensions]
+      typographer = false
       [markup.goldmark.extensions.passthrough]
         enable = true
         [markup.goldmark.extensions.passthrough.delimiters]
