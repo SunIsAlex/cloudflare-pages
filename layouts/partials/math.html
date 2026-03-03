@@ -1,4 +1,9 @@
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net.cn/npm/mathjax@3/es5/tex-svg.js" data-no-instant></script>
+{{ $js := resources.Get "js/tex-svg.js" }}
+{{ if $js }}
+  {{/* 如果你想压缩或添加指纹（Fingerprint）以利用 EdgeOne 的缓存加速 */}}
+  {{ $secureJS := $js | resources.Minify | resources.Fingerprint }}
+  <script defer src="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}" data-no-instant></script>
+{{ end }}
 <script>
   MathJax = {
     // 将原先的 chtml 替换为 svg
