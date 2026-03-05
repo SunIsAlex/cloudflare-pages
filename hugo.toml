@@ -79,6 +79,4 @@ home = ["HTML", "RSS", "JSON"]
 [module]
   [[module.imports]]
     path = "github.com/SunIsAlex/hugo-notice-papermod"
-  [[module.imports]]
-    path = "hugo-PaperMod"
 
