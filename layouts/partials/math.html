@@ -1,10 +1,9 @@
-<script defer src="https://cdn.staticfile.net/mathjax/3.2.2/es5/tex-svg-full.js" data-no-instant></script>
+<script async src="https://cdn.staticfile.net/mathjax/3.2.2/es5/tex-svg-full.js"></script>
 <script defer src="https://www.desmos.com/api/v1.11/calculator.js?apiKey=7f7233882da446d38b874bbef14298bd"></script>
 <script>
   window.MathJax = {
     // 将原先的 chtml 替换为 svg
     tex: {
-      packages: {'[+]': ['mhchem']},
       displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
       inlineMath: [['\\(', '\\)'],['$', '$']]                  // inline
     },
@@ -13,10 +12,11 @@
     },
     startup: {
     pageReady: () => {
-      return MathJax.startup.defaultPageReady().then(() => {
-        console.log('MathJax loaded and page ready');
-        // 渲染完成后执行缩放逻辑
-        const resizeMath = () => {
+      const paragraphs = document.querySelectorAll('.post-content, .post-entry');
+        
+        // 只渲染这些 <p> 内部的公式
+        return MathJax.typesetPromise(paragraphs).then(() => {
+	  const resizeMath = () => {
           console.log('Resizing math expressions...');
           document.querySelectorAll('mjx-container:not([display])').forEach(function(e) {
             // 重置缩放，防止重复计算
@@ -38,22 +38,12 @@
         resizeMath();
         // 如果有窗口大小改变，重新计算
         window.addEventListener('resize', resizeMath);
+
+        });
       });
     }
-  },options: {
-    enableMenu: false,        // 关键：禁用右键菜单
-    enableEnrichment: false,  // 关键：禁用语义增强
-    enableSpeech: false,      // 关键：禁用语音生成
-    enableBraille: false,     // 关键：禁用盲文生成
-    menuOptions: {
-      settings: {
-        enrich: false        // 同时也关闭菜单中的对应项
-      }
-    }
-  },
-  loader: {
-    load: ['input/tex', 'output/svg','[tex]/mhchem']
   },
   };
   
 </script>
+
