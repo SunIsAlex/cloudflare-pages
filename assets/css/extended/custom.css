@@ -375,7 +375,6 @@ background: rgb(25,25,25)
     margin: 1.5rem auto; /* 保持居中 */
     min-width: 100px;
     min-height: 80px;
-    background: var(--code-bg); /* 使用主题变量作为背景色 */
     border-radius: 8px;
     overflow: hidden;
 }
@@ -412,4 +411,68 @@ background: rgb(25,25,25)
 .dark .loading-spinner {
     border: 3px solid rgba(255, 255, 255, 0.1);
     border-top: 3px solid var(--primary);
+}
+
+.img-caption {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: #999 !important; /* 使用主题的次要文字颜色 */
+    text-align: center;
+    font-style: italic; /* 斜体表现通常更像标题 */
+}
+
+/* 确保 figure 容器不会给布局带来多余的边距 */
+figure.img-wrapper {
+    margin: 2rem auto;
+    text-align: center;
+}
+
+/* 容器设置 */
+figure.img-wrapper {
+    margin: 24px auto; /* 知乎图片上下间距较大 */
+    text-align: center;
+    position: relative;
+}
+
+figure.img-wrapper img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px; /* 知乎图片圆角非常小 */
+    max-width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 知乎风格的 Figcaption */
+figure.img-wrapper figcaption {
+    margin-top: 10px;        /* 图片与文字的间距 */
+    color: #999;             /* 知乎经典的辅助文字颜色 */
+    font-size: 14px;         /* 略小于正文 */
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* 夜间模式适配：稍微加亮文字颜色 */
+.dark figure.img-wrapper figcaption {
+    color: #8b8b8b;
+}
+
+/* 加载圆圈（复用之前的样式，但适配知乎色调） */
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(0, 0, 0, 0.05);
+    border-top: 2px solid #8590a6; /* 知乎蓝灰色调 */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }

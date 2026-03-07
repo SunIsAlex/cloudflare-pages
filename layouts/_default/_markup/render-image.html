@@ -13,7 +13,7 @@
   {{- end -}}
 {{- end -}}
 {{- $attributes := merge .Attributes (dict "alt" .Text "src" $src "title" (.Title | transform.HTMLEscape) "loading" "lazy") -}}
-<div class="img-wrapper">
+<figure class="img-wrapper">
   <div class="loading-spinner"></div>
   <img
     {{- range $k, $v := $attributes -}}
@@ -22,5 +22,9 @@
       {{- end -}}
     {{- end -}}
     onload="this.style.opacity=1; this.previousElementSibling.style.display='none';">
-</div>
+  {{- /* 如果 Markdown 中写了 title，则显示为标题 */ -}}
+    {{- with .Title -}}
+      <figcaption class="img-caption">{{ . | transform.HTMLEscape }}</figcaption>
+    {{- end -}}
+</figure>
 {{- /**/ -}}

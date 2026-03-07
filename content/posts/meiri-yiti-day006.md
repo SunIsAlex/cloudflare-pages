@@ -5,7 +5,7 @@ draft : false
 title : '每日艺题 DAY006'
 ---
 
-![题目图片](https://img.alexsun.one/file/AgACAgEAAxkDAAMJaZU0k-ji49KrdkCC8LapAtkOd_gAAgoMaxuyQalEKjKfi4mU-1kBAAMCAAN5AAM6BA.jpg)
+![题目图片](https://img.alexsun.one/file/AgACAgEAAxkDAAMJaZU0k-ji49KrdkCC8LapAtkOd_gAAgoMaxuyQalEKjKfi4mU-1kBAAMCAAN5AAM6BA.jpg "古诗词与生物学")
 
 Note:
 1. 乙烯促进果实**成熟**，而非发育
