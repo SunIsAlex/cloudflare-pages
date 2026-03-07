@@ -1,9 +1,4 @@
-{{ $js := resources.Get "js/tex-svg.js" }}
-{{ if $js }}
-  {{/* 如果你想压缩或添加指纹（Fingerprint）以利用 EdgeOne 的缓存加速 */}}
-  {{ $secureJS := $js | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}" data-no-instant></script>
-{{ end }}
+<script defer src="https://cdn.staticfile.net/mathjax/3.2.2/es5/tex-svg-full.js" data-no-instant></script>
 <script defer src="https://www.desmos.com/api/v1.11/calculator.js?apiKey=7f7233882da446d38b874bbef14298bd"></script>
 <script>
   window.MathJax = {
