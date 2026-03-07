@@ -44,7 +44,20 @@
         window.addEventListener('resize', resizeMath);
       });
     }
-  }
+  },options: {
+    enableMenu: false,        // 关键：禁用右键菜单
+    enableEnrichment: false,  // 关键：禁用语义增强
+    enableSpeech: false,      // 关键：禁用语音生成
+    enableBraille: false,     // 关键：禁用盲文生成
+    menuOptions: {
+      settings: {
+        enrich: false        // 同时也关闭菜单中的对应项
+      }
+    }
+  },
+  loader: {
+    load: ['input/tex', 'output/svg']
+  },
   };
   
 </script>
