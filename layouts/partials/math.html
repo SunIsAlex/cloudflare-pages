@@ -4,6 +4,7 @@
   window.MathJax = {
     // 将原先的 chtml 替换为 svg
     tex: {
+      packages: {'[+]': ['mhchem']},
       displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
       inlineMath: [['\\(', '\\)'],['$', '$']]                  // inline
     },
