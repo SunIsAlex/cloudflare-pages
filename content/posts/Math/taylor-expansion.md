@@ -18,20 +18,20 @@ cover :
 ### 1. 带有皮亚诺余项的泰勒公式
 
 若函数 \( f(x) \) 在点 \( x_0 \) 处存在直至 \( n \) 阶导数，则有
-\[f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + o((x - x_0)^n).\]
+$$f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + o((x - x_0)^n).$$
 
 用得较多的是泰勒公式在 \( x_0 = 0 \) 时的特殊形式：
-\[f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n + o(x^n).\]
+$$f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n + o(x^n).$$
 
 它也称为 (带有皮亚诺余项的) {{<term-modal file="taylor-expansion.mdtext" id="taylor expansion">}}麦克劳林 (Maclaurin) 公式。{{</term-modal>}}
 
 ### 2. 带有拉格朗日余项的泰勒公式
 
 若函数 \( f(x) \) 在 \([a, b]\) 上存在直至 \( n \) 阶的连续导函数，在 \((a, b)\) 内存在 \( n+1 \) 阶导函数，则对任意给定的 \( x, x_0 \in [a, b] \)，至少存在一点 \(\xi \in (a, b)\)，使得
-\[f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - x_0)^{n+1}.\]
+$$f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)}{2!}(x - x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - x_0)^{n+1}.$$
 
 当 \( x_0 = 0 \) 时，得到
-\[f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n + \frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1} \quad (0 < \theta < 1).\]
+$$f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \cdots + \frac{f^{(n)}(0)}{n!}x^n + \frac{f^{(n+1)}(\theta x)}{(n+1)!}x^{n+1} \quad (0 < \theta < 1).$$
 
 它也称为 (带有拉格朗日余项的) 麦克劳林公式。
 
