@@ -2,13 +2,14 @@
 <script>
   window.MathJax = {
     options: {
-      menuOptions: {
-        settings: {
-          assistiveMml: false,   // true to enable assistive MathML
-          collapsible: false,   // true to enable collapsible math
-          explorer: false      // true to enable the expression explorer
-        }
+	enableMenu: false,
+menuOptions: {
+      settings: {
+        assistiveMml: false,   // true to enable assistive MathML
+        collapsible: false,   // true to enable collapsible math
+        explorer: false      // true to enable the expression explorer
       }
+    }
     },
     loader: {
       // 关键：既然已经集成了，这里必须为空，防止它去 assets 找组件
