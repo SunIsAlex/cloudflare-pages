@@ -49,8 +49,6 @@ startup: {
 
       setTimeout(() => {
         // 视觉反馈
-        target.style.transition = 'background 0.8s ease';
-        target.style.background = 'rgba(255, 255, 0, 0.15)';
 
         MathJax.typesetPromise([target])
           .then(() => {
@@ -67,6 +65,7 @@ startup: {
             });
             setTimeout(() => { target.style.background = 'transparent'; }, 500);
             observer.unobserve(target);
+
             console.log('✅ 已渲染段落:', target);
           })
           .catch(err => {
