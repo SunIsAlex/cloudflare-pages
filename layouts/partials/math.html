@@ -91,7 +91,7 @@ startup: {
     // 4. 深度遍历：确保每一个容器内的每一个段落都被注册
     containers.forEach((container, index) => {
       // 这里的选择器可以根据你的 HTML 结构调整，增加 div 以防公式直接写在 div 里
-      const targets = container.querySelectorAll('p, blockquote, li, .math-block');
+      const targets = container.querySelectorAll('p, blockquote, li, .math-block td');
       
       if (targets.length === 0) {
         // 如果容器里直接就是文本，没有 p 标签，则观察容器本身
