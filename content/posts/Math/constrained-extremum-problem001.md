@@ -99,7 +99,9 @@ $$8a+b \ge 4 \sqrt[4]{(2-\lambda)(1-\lambda)^2 \lambda}$$
 取等条件要求各项相等：
 $$4(2-\lambda)a = \frac{1-\lambda}{2}b = \lambda(4a+b)$$
 由前两项得：$a = \frac{1-\lambda}{8(2-\lambda)}b$
-由第一项与第三项得：$4(2-\lambda)a = 4\lambda a + \lambda b \implies (8-8\lambda)a = \lambda b \implies a = \frac{\lambda}{8(1-\lambda)}b$
+
+由第一项与第三项得:
+$4(2-\lambda)a = 4\lambda a + \lambda b \implies (8-8\lambda)a = \lambda b \implies a = \frac{\lambda}{8(1-\lambda)}b$
 令两个 $a$ 的表达式相等：
 $$\frac{1-\lambda}{2-\lambda} = \frac{\lambda}{1-\lambda} \implies (1-\lambda)^2 = \lambda(2-\lambda)$$
 $$1-2\lambda+\lambda^2 = 2\lambda-\lambda^2 \implies 2\lambda^2-4\lambda+1=0$$
