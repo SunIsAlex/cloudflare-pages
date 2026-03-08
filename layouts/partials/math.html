@@ -1,56 +1,61 @@
 <script defer src="https://www.desmos.com/api/v1.11/calculator.js?apiKey=7f7233882da446d38b874bbef14298bd"></script>
 <script>
-window.MathJax = {
-loader: {
-    //paths: {
-      // 定义一个名为 'mhchem-cdn' 的路径，指向你的 OSS 文件夹（不带文件名）
-    //  'mhchem-cdn': 'https://imgbed-alexsun.oss-cn-beijing.aliyuncs.com/assets/js'
-  //  },
-    // 加载时使用刚才定义的路径别名，并指定文件名（不带 .js 后缀）
-    load: ['[tex]/mhchem']
-  },
-  tex: {
-    packages: {'[+]': ['mhchem']},
-	displayMath: [['\\[', '\\]'], ['$$', '$$']], 
-     inlineMath: [['$','$'],['\\(','\\)']]
-  },
-  svg: {
-fontCache: 'global',
-    internalSpeechTitles: false,
-    // 确保使用内联路径
-    displayMessages: false
-	  },
-  startup: {
-    pageReady: () => {
-      // 1. 获取需要渲染的容器
-      const paragraphs = document.querySelectorAll('.post-content, .post-entry');
-      
-      // 2. 执行渲染并返回 Promise
-      return MathJax.typesetPromise(paragraphs).then(() => {
-        const resizeMath = () => {
-          console.log('正在调整公式大小...');
-          document.querySelectorAll('mjx-container:not([display])').forEach(function(e) {
-            e.style.fontSize = '100%';
-            const mathWidth = e.offsetWidth;
-            const parentWidth = e.parentNode.offsetWidth;
-            if (mathWidth > parentWidth) {
-              const scale = (parentWidth / mathWidth) * 98;
-              e.style.fontSize = scale + '%';
-              e.style.display = 'inline-block';
-              e.style.verticalAlign = 'middle';
-            }
-          });
-        };
+  window.MathJax = {
+    options: {
+      menuOptions: {
+        settings: {
+          assistiveMml: false,   // true to enable assistive MathML
+          collapsible: false,   // true to enable collapsible math
+          explorer: false      // true to enable the expression explorer
+        }
+      }
+    },
+    loader: {
+      // 关键：既然已经集成了，这里必须为空，防止它去 assets 找组件
+      load: []
+    },
+    tex: {
+      packages: { '[+]': ['mhchem'] },
+      displayMath: [['\\[', '\\]'], ['$$', '$$']],
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global',
+      internalSpeechTitles: false,
+      // 确保使用内联路径
+      displayMessages: false
+    },
+    startup: {
+      pageReady: () => {
+        // 1. 获取需要渲染的容器
+        const paragraphs = document.querySelectorAll('.post-content, .post-entry');
 
-        // 3. 执行一次缩放并绑定监听
-        resizeMath();
-        window.addEventListener('resize', resizeMath);
-      }).catch((err) => console.error('MathJax 渲染出错:', err)); // 捕获错误
+        // 2. 执行渲染并返回 Promise
+        return MathJax.typesetPromise(paragraphs).then(() => {
+          const resizeMath = () => {
+            console.log('正在调整公式大小...');
+            document.querySelectorAll('mjx-container:not([display])').forEach(function (e) {
+              e.style.fontSize = '100%';
+              const mathWidth = e.offsetWidth;
+              const parentWidth = e.parentNode.offsetWidth;
+              if (mathWidth > parentWidth) {
+                const scale = (parentWidth / mathWidth) * 98;
+                e.style.fontSize = scale + '%';
+                e.style.display = 'inline-block';
+                e.style.verticalAlign = 'middle';
+              }
+            });
+          };
+
+          // 3. 执行一次缩放并绑定监听
+          resizeMath();
+          window.addEventListener('resize', resizeMath);
+        }).catch((err) => console.error('MathJax 渲染出错:', err)); // 捕获错误
+      }
     }
-  }
-};
-  
+  };
+
 </script>
 
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 
+<script defer src="/es5/mathjax-full-integrated.js"></script>
