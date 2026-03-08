@@ -3,12 +3,13 @@
   window.MathJax = {
     options: {
 	enableMenu: false,
-menuOptions: {
+	menuOptions: {
       settings: {
         assistiveMml: false,   // true to enable assistive MathML
         collapsible: false,   // true to enable collapsible math
         explorer: false      // true to enable the expression explorer
-      }
+      },
+	processHtmlClass: "math"
     }
     },
     loader: {
@@ -28,54 +29,54 @@ menuOptions: {
     },
 
 
-
 startup: {
   pageReady: () => {
-    // 1. 扩大寻找范围，确保抓住所有潜在容器
-    const containers = Array.from(document.querySelectorAll('.post-content, .post-entry'));
-    
-    if (containers.length === 0) {
-      console.warn('未找到任何文章容器，请检查类名是否正确');
+    const mathElements = document.querySelectorAll('.math');
+
+    if (mathElements.length === 0) {
+      alert('未找到 .math 元素');
       return;
     }
 
+    const RENDER_DELAY = 0;
 
-    const RENDER_DELAY = 0; 
-
-    // 2. 核心渲染与缩放逻辑
-    const processMath = (target) => {
-      if (target.dataset.mathProcessed === "true") return;
-      target.dataset.mathProcessed = "true";
+    const processMath = (el) => {
+      if (el.dataset.mathProcessed === "true") return;
+      el.dataset.mathProcessed = "true";
 
       setTimeout(() => {
-        // 视觉反馈
 
-        MathJax.typesetPromise([target])
+        MathJax.typesetPromise([el])
           .then(() => {
-            const mathContainers = target.querySelectorAll('mjx-container');
-            mathContainers.forEach(container => {
+
+            const containers = el.querySelectorAll('mjx-container');
+
+            containers.forEach(container => {
+
               container.style.fontSize = '100%';
+
               const mathWidth = container.scrollWidth;
               const parentWidth = container.parentNode.offsetWidth;
+
               if (mathWidth > parentWidth) {
                 const scale = Math.floor((parentWidth / mathWidth) * 95);
                 container.style.fontSize = scale + '%';
                 container.style.display = 'inline-block';
               }
-            });
-            setTimeout(() => { target.style.background = 'transparent'; }, 500);
-            observer.unobserve(target);
 
-            console.log('✅ 已渲染段落:', target);
+            });
+
+            observer.unobserve(el);
+
           })
           .catch(err => {
             console.error('MathJax Error:', err);
-            target.dataset.mathProcessed = "false"; // 出错则允许重试
+            el.dataset.mathProcessed = "false";
           });
+
       }, RENDER_DELAY);
     };
 
-    // 3. 创建观察器
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -83,44 +84,42 @@ startup: {
         }
       });
     }, {
-      rootMargin: '50px', // 稍微留一点余量，防止完全卡死
-      threshold: 0.1
+      rootMargin: '150px',
+      threshold: 0.01
     });
 
-    // 4. 深度遍历：确保每一个容器内的每一个段落都被注册
-    containers.forEach((container, index) => {
-      // 这里的选择器可以根据你的 HTML 结构调整，增加 div 以防公式直接写在 div 里
-      const targets = container.querySelectorAll('p, blockquote, li, td');
-      
-      if (targets.length === 0) {
-        // 如果容器里直接就是文本，没有 p 标签，则观察容器本身
-        observer.observe(container);
-      } else {
-        targets.forEach(t => observer.observe(t));
-      }
-      console.log(`容器 #${index + 1} 已注册 ${targets.length} 个观察目标`);
-    });
+    mathElements.forEach(el => observer.observe(el));
 
-    // 5. 响应式
+
+    // resize 自适应
     let resizeTimer;
+
     window.addEventListener('resize', () => {
+
       clearTimeout(resizeTimer);
+
       resizeTimer = setTimeout(() => {
+
         document.querySelectorAll('mjx-container').forEach(container => {
-          // 简单的重新缩放逻辑
+
           container.style.fontSize = '100%';
+
           const mathWidth = container.scrollWidth;
           const parentWidth = container.parentNode.offsetWidth;
+
           if (mathWidth > parentWidth) {
-             container.style.fontSize = Math.floor((parentWidth / mathWidth) * 95) + '%';
+            container.style.fontSize =
+              Math.floor((parentWidth / mathWidth) * 95) + '%';
           }
+
         });
+
       }, 300);
+
     });
+
   }
 }
-
-
   };
 
 </script>
