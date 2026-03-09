@@ -1,118 +1,165 @@
 <script defer src="https://www.desmos.com/api/v1.11/calculator.js?apiKey=7f7233882da446d38b874bbef14298bd"></script>
 <script>
-  window.MathJax = {
-    options: {
-      enableMenu: false,
-      // 正确：processHtmlClass 应该直接在 options 下
-      processHtmlClass: "math",
-      menuOptions: {
-        settings: {
-          assistiveMml: false,
-          collapsible: false,
-          explorer: false
-        }
+window.MathJax = {
+
+  options: {
+    enableMenu: false,
+    processHtmlClass: "math",
+    menuOptions: {
+      settings: {
+        assistiveMml: false,
+        collapsible: false,
+        explorer: false
       }
-    },
-loader: {
+    }
+  },
+
+  loader: {
     load: ['[tex]/mhchem']
   },
-    tex: {
-      packages: { '[+]': ['mhchem'] },
-      displayMath: [['$$', '$$']],
-      inlineMath: [['$', '$']]
-    },
 
+  tex: {
+    packages: { '[+]': ['mhchem'] },
+    displayMath: [['$$', '$$']],
+    inlineMath: [['$', '$']]
+  },
 
-    startup: {
-      pageReady: () => {
-        const mathElements = document.querySelectorAll('.math');
+  startup: {
+    pageReady: () => {
 
-        if (mathElements.length === 0) {
+      const mathElements = document.querySelectorAll('.math');
+      if (!mathElements.length) return;
+
+      /* ---------------------------
+         判断是否已经渲染
+      --------------------------- */
+      const isRendered = (el) =>
+        el.querySelector('mjx-container') !== null;
+
+      /* ---------------------------
+         公式缩放
+      --------------------------- */
+      const adjustScale = (container) => {
+
+        container.style.fontSize = '100%';
+
+        const mathWidth = container.scrollWidth;
+        const parentWidth = container.parentNode.offsetWidth;
+
+        if (mathWidth > parentWidth) {
+
+          const scale =
+            Math.floor((parentWidth / mathWidth) * 95);
+
+          container.style.fontSize = scale + '%';
+          container.style.display = 'inline-block';
+        }
+      };
+
+      /* ---------------------------
+         渲染函数
+      --------------------------- */
+      const renderMath = (el) => {
+
+        if (el.dataset.mathProcessed === "true") return;
+        el.dataset.mathProcessed = "true";
+
+        if (isRendered(el)) {
+          el.querySelectorAll('mjx-container')
+            .forEach(adjustScale);
+          observer.unobserve(el);
           return;
         }
 
+        MathJax.typesetPromise([el])
+          .then(() => {
 
-        const processMath = (el) => {
-          if (el.dataset.mathProcessed === "true") return;
-          el.dataset.mathProcessed = "true";
+            el.querySelectorAll('mjx-container')
+              .forEach(adjustScale);
 
+            observer.unobserve(el);
 
-          MathJax.typesetPromise([el])
-            .then(() => {
-
-              const containers = el.querySelectorAll('mjx-container');
-
-              containers.forEach(container => {
-
-                container.style.fontSize = '100%';
-
-                const mathWidth = container.scrollWidth;
-                const parentWidth = container.parentNode.offsetWidth;
-
-                if (mathWidth > parentWidth) {
-                  const scale = Math.floor((parentWidth / mathWidth) * 95);
-                  container.style.fontSize = scale + '%';
-                  container.style.display = 'inline-block';
-                }
-
-              });
-
-              observer.unobserve(el);
-
-            })
-            .catch(err => {
-              console.error('MathJax Error:', err);
-              el.dataset.mathProcessed = "false";
-            });
-
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              processMath(entry.target);
-            }
+          })
+          .catch(err => {
+            console.error('MathJax Error:', err);
+            el.dataset.mathProcessed = "false";
           });
-        }, {
-          rootMargin: '250px',
-          threshold: 0.01
+      };
+
+      /* ---------------------------
+         可视区懒加载
+      --------------------------- */
+      const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            renderMath(entry.target);
+          }
         });
 
-        mathElements.forEach(el => observer.observe(el));
+      }, {
+        rootMargin: '250px',
+        threshold: 0.01
+      });
 
+      mathElements.forEach(el => observer.observe(el));
 
-        // resize 自适应
-        let resizeTimer;
+      /* ---------------------------
+         后台渲染队列
+      --------------------------- */
 
-        window.addEventListener('resize', () => {
+      const idleQueue = [...mathElements];
 
-          clearTimeout(resizeTimer);
+      const processIdleQueue = (deadline) => {
 
-          resizeTimer = setTimeout(() => {
+        while (
+          (deadline.timeRemaining() > 5 || deadline.didTimeout) &&
+          idleQueue.length
+        ) {
 
-            document.querySelectorAll('mjx-container').forEach(container => {
+          const el = idleQueue.shift();
 
-              container.style.fontSize = '100%';
+          if (el.dataset.mathProcessed !== "true") {
+            renderMath(el);
+          }
+        }
 
-              const mathWidth = container.scrollWidth;
-              const parentWidth = container.parentNode.offsetWidth;
+        if (idleQueue.length) {
+          requestIdleCallback(processIdleQueue);
+        }
+      };
 
-              if (mathWidth > parentWidth) {
-                container.style.fontSize =
-                  Math.floor((parentWidth / mathWidth) * 95) + '%';
-              }
-
-            });
-
-          }, 300);
-
-        });
-
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(processIdleQueue);
+      } else {
+        setTimeout(() => processIdleQueue({
+          timeRemaining: () => 50,
+          didTimeout: true
+        }), 2000);
       }
+
+      /* ---------------------------
+         resize 自适应
+      --------------------------- */
+
+      let resizeTimer;
+
+      window.addEventListener('resize', () => {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(() => {
+
+          document.querySelectorAll('mjx-container')
+            .forEach(adjustScale);
+
+        }, 300);
+
+      });
+
     }
-  };
-
+  }
+};
 </script>
-
 
 <script defer src="/es5/tex-chtml.js"></script>
