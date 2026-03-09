@@ -17,35 +17,6 @@ background: rgb(25,25,25)
     z-index: 1000;
     transition: transform 0.3s ease;  /* 平滑隐藏/显示 */
 }
-/* 只针对显示公式（display math）启用滚动 */
-.post-content mjx-container[display="true"] {
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  max-width: 100%;
-  white-space: nowrap;
-}
-
-/* 行内公式强制不显示滚动条（即使有 auto） */
-.post-content mjx-container[display="false"] {
-  overflow-x: hidden !important;   /* 或 visible，根据需要 */
-  overflow-y: hidden !important;
-  max-width: 100%;
-}
-
-/* 可选：隐藏滚动条本身的轨道（美观，但不影响功能） */
-.post-content mjx-container[display="true"]::-webkit-scrollbar {
-  height: 8px;                    /* 调小高度 */
-}
-
-.post-content mjx-container[display="true"]::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.3);    /* 半透明或自定义颜色 */
-  border-radius: 4px;
-}
-
-.post-content mjx-container[display="true"]::-webkit-scrollbar-track {
-  background: transparent;        /* 轨道透明，视觉上更干净 */
-}
-
 
 /* 2026/02/18 表格美化 - 修复滚动 + 保留样式 */
 
@@ -122,7 +93,6 @@ background: rgb(25,25,25)
 .post-content h2, .markdown-body h2,
 .post-content h3, .markdown-body h3,
 .post-content h4, .markdown-body h4 {
-  /*color: #0d1b2a;*/                    /* 更深的蓝黑，标题突出 */
   font-weight: 750;                   /* 接近 LaTeX 粗体感 */
   border-bottom: none;                /* 如果原主题有下划线可去掉 */
 }
