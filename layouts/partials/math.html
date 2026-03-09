@@ -30,15 +30,19 @@ window.MathJax = {
       const mathElements = document.querySelectorAll('.math');
       if (!mathElements.length) return;
 
+      const renderedContainers = new Set();
+
       /* ---------------------------
          判断是否已经渲染
       --------------------------- */
+
       const isRendered = (el) =>
         el.querySelector('mjx-container') !== null;
 
       /* ---------------------------
          公式缩放
       --------------------------- */
+
       const adjustScale = (container) => {
 
         container.style.fontSize = '100%';
@@ -59,14 +63,21 @@ window.MathJax = {
       /* ---------------------------
          渲染函数
       --------------------------- */
+
       const renderMath = (el) => {
 
         if (el.dataset.mathProcessed === "true") return;
         el.dataset.mathProcessed = "true";
 
-        if (isRendered(el)) {
-          el.querySelectorAll('mjx-container')
-            .forEach(adjustScale);
+        const containers = el.querySelectorAll('mjx-container');
+
+        if (containers.length) {
+
+          containers.forEach(c => {
+            adjustScale(c);
+            renderedContainers.add(c);
+          });
+
           observer.unobserve(el);
           return;
         }
@@ -74,8 +85,12 @@ window.MathJax = {
         MathJax.typesetPromise([el])
           .then(() => {
 
-            el.querySelectorAll('mjx-container')
-              .forEach(adjustScale);
+            const newContainers = el.querySelectorAll('mjx-container');
+
+            newContainers.forEach(c => {
+              adjustScale(c);
+              renderedContainers.add(c);
+            });
 
             observer.unobserve(el);
 
@@ -89,6 +104,7 @@ window.MathJax = {
       /* ---------------------------
          可视区懒加载
       --------------------------- */
+
       const observer = new IntersectionObserver((entries) => {
 
         entries.forEach(entry => {
@@ -137,29 +153,23 @@ window.MathJax = {
           didTimeout: true
         }), 2000);
       }
-
       /* ---------------------------
          resize 自适应
       --------------------------- */
+let resizeRAF;
 
-      let resizeTimer;
+window.addEventListener('resize', () => {
 
-      window.addEventListener('resize', () => {
+  cancelAnimationFrame(resizeRAF);
 
-        clearTimeout(resizeTimer);
+  resizeRAF = requestAnimationFrame(() => {
+    renderedContainers.forEach(adjustScale);
+  });
 
-        resizeTimer = setTimeout(() => {
+});
 
-          document.querySelectorAll('mjx-container')
-            .forEach(adjustScale);
-
-        }, 300);
-
-      });
-
-    }
+	}
   }
 };
 </script>
-
 <script defer src="/es5/tex-chtml.js"></script>
