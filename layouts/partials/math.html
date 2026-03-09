@@ -18,14 +18,8 @@
     },
     tex: {
       packages: { '[+]': ['mhchem'] },
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    },
-    svg: {
-      fontCache: 'global',
-      internalSpeechTitles: false,
-      // 确保使用内联路径
-      displayMessages: false
+      displayMath: [['$$', '$$']],
+      inlineMath: [['$', '$']]
     },
 
 
@@ -34,17 +28,14 @@ startup: {
     const mathElements = document.querySelectorAll('.math');
 
     if (mathElements.length === 0) {
-      alert('未找到 .math 元素');
       return;
     }
 
-    const RENDER_DELAY = 0;
 
     const processMath = (el) => {
       if (el.dataset.mathProcessed === "true") return;
       el.dataset.mathProcessed = "true";
 
-      setTimeout(() => {
 
         MathJax.typesetPromise([el])
           .then(() => {
@@ -74,7 +65,6 @@ startup: {
             el.dataset.mathProcessed = "false";
           });
 
-      }, RENDER_DELAY);
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -84,7 +74,7 @@ startup: {
         }
       });
     }, {
-      rootMargin: '150px',
+      rootMargin: '200px',
       threshold: 0.01
     });
 
