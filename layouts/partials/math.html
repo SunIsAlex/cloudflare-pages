@@ -13,10 +13,9 @@
         }
       }
     },
-    loader: {
-      // 关键：既然已经集成了，这里必须为空，防止它去 assets 找组件
-      load: []
-    },
+loader: {
+    load: ['[tex]/mhchem']
+  },
     tex: {
       packages: { '[+]': ['mhchem'] },
       displayMath: [['$$', '$$']],
@@ -75,7 +74,7 @@
             }
           });
         }, {
-          rootMargin: '200px',
+          rootMargin: '250px',
           threshold: 0.01
         });
 
@@ -116,4 +115,4 @@
 </script>
 
 
-<script defer src="/es5/mathjax-full-integrated.js"></script>
+<script defer src="/es5/tex-chtml.js"></script>
