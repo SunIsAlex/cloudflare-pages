@@ -1,0 +1,9 @@
+{{- if eq .Type "block" -}}
+<div class="math math-block">
+$${{ .Inner | safeHTML }}$$
+</div>
+{{- else -}}
+<span class="math math-inline">
+${{ .Inner | safeHTML }}$
+</span>
+{{- end -}}

@@ -2,11 +2,14 @@
 <script>
   window.MathJax = {
     options: {
+      enableMenu: false,
+      // 正确：processHtmlClass 应该直接在 options 下
+      processHtmlClass: "math",
       menuOptions: {
         settings: {
-          assistiveMml: false,   // true to enable assistive MathML
-          collapsible: false,   // true to enable collapsible math
-          explorer: false      // true to enable the expression explorer
+          assistiveMml: false,
+          collapsible: false,
+          explorer: false
         }
       }
     },
@@ -16,41 +19,96 @@
     },
     tex: {
       packages: { '[+]': ['mhchem'] },
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
+      displayMath: [['$$', '$$']],
+      inlineMath: [['$', '$']]
     },
-    svg: {
-      fontCache: 'global',
-      internalSpeechTitles: false,
-      // 确保使用内联路径
-      displayMessages: false
-    },
+
+
     startup: {
       pageReady: () => {
-        // 1. 获取需要渲染的容器
-        const paragraphs = document.querySelectorAll('.post-content, .post-entry');
+        const mathElements = document.querySelectorAll('.math');
 
-        // 2. 执行渲染并返回 Promise
-        return MathJax.typesetPromise(paragraphs).then(() => {
-          const resizeMath = () => {
-            console.log('正在调整公式大小...');
-            document.querySelectorAll('mjx-container:not([display])').forEach(function (e) {
-              e.style.fontSize = '100%';
-              const mathWidth = e.offsetWidth;
-              const parentWidth = e.parentNode.offsetWidth;
-              if (mathWidth > parentWidth) {
-                const scale = (parentWidth / mathWidth) * 98;
-                e.style.fontSize = scale + '%';
-                e.style.display = 'inline-block';
-                e.style.verticalAlign = 'middle';
-              }
+        if (mathElements.length === 0) {
+          return;
+        }
+
+
+        const processMath = (el) => {
+          if (el.dataset.mathProcessed === "true") return;
+          el.dataset.mathProcessed = "true";
+
+
+          MathJax.typesetPromise([el])
+            .then(() => {
+
+              const containers = el.querySelectorAll('mjx-container');
+
+              containers.forEach(container => {
+
+                container.style.fontSize = '100%';
+
+                const mathWidth = container.scrollWidth;
+                const parentWidth = container.parentNode.offsetWidth;
+
+                if (mathWidth > parentWidth) {
+                  const scale = Math.floor((parentWidth / mathWidth) * 95);
+                  container.style.fontSize = scale + '%';
+                  container.style.display = 'inline-block';
+                }
+
+              });
+
+              observer.unobserve(el);
+
+            })
+            .catch(err => {
+              console.error('MathJax Error:', err);
+              el.dataset.mathProcessed = "false";
             });
-          };
 
-          // 3. 执行一次缩放并绑定监听
-          resizeMath();
-          window.addEventListener('resize', resizeMath);
-        }).catch((err) => console.error('MathJax 渲染出错:', err)); // 捕获错误
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              processMath(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '200px',
+          threshold: 0.01
+        });
+
+        mathElements.forEach(el => observer.observe(el));
+
+
+        // resize 自适应
+        let resizeTimer;
+
+        window.addEventListener('resize', () => {
+
+          clearTimeout(resizeTimer);
+
+          resizeTimer = setTimeout(() => {
+
+            document.querySelectorAll('mjx-container').forEach(container => {
+
+              container.style.fontSize = '100%';
+
+              const mathWidth = container.scrollWidth;
+              const parentWidth = container.parentNode.offsetWidth;
+
+              if (mathWidth > parentWidth) {
+                container.style.fontSize =
+                  Math.floor((parentWidth / mathWidth) * 95) + '%';
+              }
+
+            });
+
+          }, 300);
+
+        });
+
       }
     }
   };
