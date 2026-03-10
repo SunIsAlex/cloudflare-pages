@@ -13,9 +13,11 @@ window.MathJax = {
       }
     }
   },
-
+chtml: {
+  fontURL: '/mathjax-newcm-font/chtml/woff2'
+},
   loader: {
-    load: ['[tex]/mhchem']
+    load: ['[tex]/mhchem','/es5/chtml.js']
   },
 
   tex: {
