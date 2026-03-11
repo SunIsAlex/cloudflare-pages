@@ -3,175 +3,37 @@
 window.MathJax = {
 
   options: {
-    enableMenu: false,
     processHtmlClass: "math",
-    menuOptions: {
-      settings: {
-        assistiveMml: false,
-        collapsible: false,
-        explorer: false
-      }
-    }
+    lazyMargin: '200px',
+    lazyAlwaysTypeset: null
   },
-chtml: {
-  fontURL: '/mathjax-newcm-font/chtml/woff2'
-},
   loader: {
-    load: ['[tex]/mhchem','/es5/chtml.js']
+    load: ['ui/lazy','[tex]/mhchem']
   },
 
   tex: {
     packages: { '[+]': ['mhchem'] },
-    displayMath: [['$$', '$$']],
-    inlineMath: [['$', '$']]
+    displayMath: [['$$','$$']],
+    inlineMath: [['$','$']]
   },
 
-  startup: {
-    pageReady: () => {
 
-      const mathElements = document.querySelectorAll('.math');
-      if (!mathElements.length) return;
-
-      const renderedContainers = new Set();
-
-      /* ---------------------------
-         判断是否已经渲染
-      --------------------------- */
-
-      const isRendered = (el) =>
-        el.querySelector('mjx-container') !== null;
-
-      /* ---------------------------
-         公式缩放
-      --------------------------- */
-
-      const adjustScale = (container) => {
-
-        container.style.fontSize = '100%';
-
-        const mathWidth = container.scrollWidth;
-        const parentWidth = container.parentNode.offsetWidth;
-
-        if (mathWidth > parentWidth) {
-
-          const scale =
-            Math.floor((parentWidth / mathWidth) * 95);
-
-          container.style.fontSize = scale + '%';
-          container.style.display = 'inline-block';
-        }
-      };
-
-      /* ---------------------------
-         渲染函数
-      --------------------------- */
-
-      const renderMath = (el) => {
-
-        if (el.dataset.mathProcessed === "true") return;
-        el.dataset.mathProcessed = "true";
-
-        const containers = el.querySelectorAll('mjx-container');
-
-        if (containers.length) {
-
-          containers.forEach(c => {
-            adjustScale(c);
-            renderedContainers.add(c);
-          });
-
-          observer.unobserve(el);
-          return;
-        }
-
-        MathJax.typesetPromise([el])
-          .then(() => {
-
-            const newContainers = el.querySelectorAll('mjx-container');
-
-            newContainers.forEach(c => {
-              adjustScale(c);
-              renderedContainers.add(c);
-            });
-
-            observer.unobserve(el);
-
-          })
-          .catch(err => {
-            console.error('MathJax Error:', err);
-            el.dataset.mathProcessed = "false";
-          });
-      };
-
-      /* ---------------------------
-         可视区懒加载
-      --------------------------- */
-
-      const observer = new IntersectionObserver((entries) => {
-
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            renderMath(entry.target);
-          }
-        });
-
-      }, {
-        rootMargin: '250px',
-        threshold: 0.01
-      });
-
-      mathElements.forEach(el => observer.observe(el));
-
-      /* ---------------------------
-         后台渲染队列
-      --------------------------- */
-
-      const idleQueue = [...mathElements];
-
-      const processIdleQueue = (deadline) => {
-
-        while (
-          (deadline.timeRemaining() > 5 || deadline.didTimeout) &&
-          idleQueue.length
-        ) {
-
-          const el = idleQueue.shift();
-
-          if (el.dataset.mathProcessed !== "true") {
-            renderMath(el);
-          }
-        }
-
-        if (idleQueue.length) {
-          requestIdleCallback(processIdleQueue);
-        }
-      };
-
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(processIdleQueue);
-      } else {
-        setTimeout(() => processIdleQueue({
-          timeRemaining: () => 50,
-          didTimeout: true
-        }), 2000);
-      }
-      /* ---------------------------
-         resize 自适应
-      --------------------------- */
-let resizeRAF;
-
-window.addEventListener('resize', () => {
-
-  cancelAnimationFrame(resizeRAF);
-
-  resizeRAF = requestAnimationFrame(() => {
-    renderedContainers.forEach(adjustScale);
-  });
-
-});
-
-	}
-  }
 };
 </script>
+<style>
+  .math-block {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.math-block mjx-container {
+  min-width: max-content;
+}
+</style>
+
 <script defer src="/es5/tex-chtml.js"></script>
