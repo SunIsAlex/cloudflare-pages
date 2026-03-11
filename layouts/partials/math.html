@@ -10,14 +10,17 @@ window.MathJax = {
   loader: {
     load: ['ui/lazy',
     'input/tex',
-        'output/chtml']
+        'output/chtml'],
   },
 
   tex: {
     displayMath: [['$$','$$']],
     inlineMath: [['$','$']]
   },
-
+chtml: {
+fontURL:"/mathjax-newcm-font/chtml/woff2",
+dynamicPrefix:"/mathjax-newcm-font/chtml/dynamic"
+}
 
 };
 </script>
@@ -36,4 +39,5 @@ window.MathJax = {
 }
 </style>
 
-<script defer src="/es5/startup.js"></script>
+<script src="https://registry.npmmirror.com/mathjax/4.1.1/files/tex-chtml.js"></script>
+
