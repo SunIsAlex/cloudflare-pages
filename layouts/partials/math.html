@@ -8,7 +8,9 @@ window.MathJax = {
     lazyAlwaysTypeset: null
   },
   loader: {
-    load: ['ui/lazy']
+    load: ['ui/lazy',
+    'input/tex',
+        'output/chtml']
   },
 
   tex: {
@@ -34,4 +36,4 @@ window.MathJax = {
 }
 </style>
 
-<script defer src="/es5/tex-chtml.js"></script>
+<script defer src="/es5/startup.js"></script>
