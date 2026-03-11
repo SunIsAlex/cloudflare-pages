@@ -8,11 +8,10 @@ window.MathJax = {
     lazyAlwaysTypeset: null
   },
   loader: {
-    load: ['ui/lazy','[tex]/mhchem']
+    load: ['ui/lazy']
   },
 
   tex: {
-    packages: { '[+]': ['mhchem'] },
     displayMath: [['$$','$$']],
     inlineMath: [['$','$']]
   },
@@ -26,7 +25,6 @@ window.MathJax = {
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 4px;
-
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
 }
