@@ -7,18 +7,14 @@
       }
     ],
     "headers": [
-      {
-        "source": "/*",
-        "headers": [
-          {
-            "key": "X-Frame-Options",
-            "value": "DENY"
-          },
-          {
-            "key": "Cache-Control",
-            "value": "max-age=7200"
-          }
-        ]
-      }
-    ]
+    {
+      "source": "/posts/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=600, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
 }
