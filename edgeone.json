@@ -8,7 +8,7 @@
     ],
     "headers": [
     {
-      "source": "/posts/:path*",
+      "source": "/posts/*",
       "headers": [
         {
           "key": "Cache-Control",
