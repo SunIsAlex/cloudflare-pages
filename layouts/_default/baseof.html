@@ -27,7 +27,11 @@
 {{ end }}
 <script>
 window.addEventListener('load', () => {
-  quicklink.listen(); // 默认预取视口内的链接
+quicklink.listen({
+  ignores: [
+    /#.*$/  // 忽略所有带 # 的链接
+  ]
+});
 });
 </script>
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
