@@ -4,7 +4,7 @@
 {{- /* Head custom content area end */ -}}
 {{ $js := resources.Get "js/Swup.umd.js"  | minify | fingerprint | resources.Copy "assets/js/Swup.umd.js" }}
 {{ if $js }}
-  <script src="{{ $js.RelPermalink }}"></script>
+  <script defer src="{{ $js.RelPermalink }}"></script>
 {{ end }}
 {{- /* Search */}}
 <link crossorigin="anonymous" rel="preload" as="fetch" href="/index.json">
@@ -72,7 +72,6 @@ if (typeof window.initPaperModSearch === 'function') {
 window.initPaperModSearch();
     }
 });
-        //window.initPaperModSearch();
 
   });
 </script>
