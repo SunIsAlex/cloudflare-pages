@@ -2,9 +2,12 @@
 {{- /*     Insert any custom code (web-analytics, resources, etc.) - it will appear in the <head></head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 {{- /* Head custom content area end */ -}}
-<script src="https://cdn.bootcdn.net/ajax/libs/swup/4.8.2/Swup.umd.min.js"></script>
+{{ $js := resources.Get "js/Swup.umd.js"  | minify | fingerprint | resources.Copy "assets/js/Swup.umd.js" }}
+{{ if $js }}
+  <script src="{{ $js.RelPermalink }}"></script>
+{{ end }}
 {{- /* Search */}}
-<link crossorigin="anonymous" rel="preload" as="fetch" href="../index.json">
+<link crossorigin="anonymous" rel="preload" as="fetch" href="/index.json">
 {{- $fastsearch := resources.Get "js/fastsearch.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify }}
 {{- $fusejs := resources.Get "js/fuse.basic.min.js" }}
 {{- $license_js := resources.Get "js/license.js" }}
@@ -75,12 +78,12 @@ window.initPaperModSearch();
 </script>
 
 <style>
-.main {
+.transition-fade {
   transition: 0.4s;
   opacity: 1;
 }
 
-html.is-animating .main {
+html.is-animating .transition-fade {
   opacity: 0;
   transform: translateY(10px);
 }
