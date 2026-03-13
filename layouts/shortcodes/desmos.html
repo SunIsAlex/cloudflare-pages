@@ -1,56 +1,53 @@
 <script defer src="https://www.desmos.com/api/v1.11.4/calculator.js?apiKey=7f7233882da446d38b874bbef14298bd"></script>
+{{ $id := .Get "id" | default (printf "calc-%d" now.UnixNano) }}
 <div class="desmos-container" 
-     id="desmos-{{ .Get "id" | default (printf "calc-%d" now.Unix) }}" 
-     style="width:100%; height:500px; border:2px solid #ccc;"></div>
+     id="desmos-{{ $id }}" 
+     data-desmos-id="{{ $id }}"
+     data-funcs="{{ .Get "funcs" | safeJS }}"
+     data-xmin="{{ .Get "xmin" | default -10 }}"
+     data-xmax="{{ .Get "xmax" | default 10 }}"
+     data-ymin="{{ .Get "ymin" | default -10 }}"
+     data-ymax="{{ .Get "ymax" | default 10 }}"
+     style="width:100%; height:500px; border:2px solid #ccc;">
+</div>
+
 <script>
-document.addEventListener('DOMContentLoaded',function() {
-  function initDesmos() {
-    if (typeof Desmos === 'undefined' || !Desmos.GraphingCalculator) {
-      console.warn('Desmos not loaded yet, retrying...');
-      setTimeout(initDesmos, 100);  // 或用 requestAnimationFrame
-      return;
+// 定义一个全局初始化函数，方便 Swup 调用
+window.initDesmosInstances = window.initDesmosInstances || function() {
+    if (typeof Desmos === 'undefined') {
+        setTimeout(window.initDesmosInstances, 200);
+        return;
     }
-    var elt = document.getElementById('desmos-{{ .Get "id" | default (printf "calc-%d" now.Unix) }}');
-    if (!elt) return;
-
-    var calculator = Desmos.GraphingCalculator(elt, {
-      expressions: true,
-      zoomButtons: true,
-      expressionsTopbar: true
-    });
-
-    // ── 關鍵在這裡 ──
-    var funcsStr = "{{ .Get "funcs" | strings.TrimSpace | safeJS }}";
-    //var funcsStr = {{ .Get "funcs" | default "" | safeJS }};
-    var funcs = funcsStr
-      .split(/[\s\|\,]+/)           // 支持 |   ,   空格  甚至多行
-      .map(s => s.trim())
-      .filter(s => s.length > 0);
-
-    var colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f"];
-
-    funcs.forEach(function(latex, i) {
-      if (latex) {
-        calculator.setExpression({
-          id: 'f' + i,
-          latex: latex,
-          color: colors[i % colors.length]
+    
+    document.querySelectorAll('.desmos-container').forEach(container => {
+        // 防止重复初始化
+        if (container.classList.contains('desmos-initialized')) return;
+        
+        const calc = Desmos.GraphingCalculator(container, {
+            expressions: true,
+            zoomButtons: true,
+            expressionsTopbar: true
         });
-      }
-    });
 
-    calculator.setMathBounds({
-      left:   {{ .Get "xmin" | default -10 }},
-      right:  {{ .Get "xmax" | default 10 }},
-      bottom: {{ .Get "ymin" | default -10 }},
-      top:    {{ .Get "ymax" | default 10 }}
-    });
-  }
+        const funcs = container.dataset.funcs.split(/[\s\|\,]+/).filter(s => s.trim());
+        const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"];
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDesmos);
-  } else {
-    initDesmos();
-  }
-});
+        funcs.forEach((latex, i) => {
+            calc.setExpression({ id: 'f' + i, latex: latex, color: colors[i % colors.length] });
+        });
+
+        calc.setMathBounds({
+            left: parseFloat(container.dataset.xmin),
+            right: parseFloat(container.dataset.xmax),
+            bottom: parseFloat(container.dataset.ymin),
+            top: parseFloat(container.dataset.ymax)
+        });
+
+        container.classList.add('desmos-initialized');
+    });
+};
+
+// 首次加载依然执行一次
+window.initDesmosInstances();
 </script>
+

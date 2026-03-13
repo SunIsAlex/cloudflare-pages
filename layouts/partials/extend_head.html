@@ -2,3 +2,85 @@
 {{- /*     Insert any custom code (web-analytics, resources, etc.) - it will appear in the <head></head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 {{- /* Head custom content area end */ -}}
+<script src="https://cdn.bootcdn.net/ajax/libs/swup/4.8.2/Swup.umd.min.js"></script>
+<link crossorigin="anonymous" rel="preload" as="fetch" href="../index.json">
+{{- $fastsearch := resources.Get "js/fastsearch.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify }}
+{{- $fusejs := resources.Get "js/fuse.basic.min.js" }}
+{{- $license_js := resources.Get "js/license.js" }}
+{{- if not site.Params.assets.disableFingerprinting }}
+{{- $search := (slice $fusejs $license_js $fastsearch ) | resources.Concat "assets/js/search.js" | fingerprint }}
+<script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}"></script>
+{{- else }}
+{{- $search := (slice $fusejs $fastsearch ) | resources.Concat "assets/js/search.js" }}
+<script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}"></script>
+{{- end }}
+<script>
+function fixPaperModMenuHighlight() {
+    // 获取当前规范化的路径 (确保结尾有斜杠，匹配 PaperMod 的 $menu_item_url 逻辑)
+    let currentPath = window.location.pathname;
+    if (!currentPath.endsWith('/')) {
+        currentPath += '/';
+    }
+
+    // 找到所有菜单项
+    const menuLinks = document.querySelectorAll('#menu a');
+    
+    menuLinks.forEach(link => {
+        // 获取链接的路径部分
+        const linkUrl = new URL(link.href, window.location.origin);
+        let linkPath = linkUrl.pathname;
+        if (!linkPath.endsWith('/')) {
+            linkPath += '/';
+        }
+
+        // 找到内部的 span (PaperMod 的 active 类挂在这里)
+        const targetSpan = link.querySelector('span');
+        if (!targetSpan) return;
+
+        // 移除旧的高亮
+        targetSpan.classList.remove('active');
+
+        // 匹配逻辑：
+        // 1. 完全一致 (Home 或精确匹配)
+        // 2. 当前路径包含菜单路径 (用于高亮分类下的文章)，排除掉根目录防止首页全亮
+        if (currentPath === linkPath) {
+            targetSpan.classList.add('active');
+        } else if (linkPath !== '/' && currentPath.startsWith(linkPath)) {
+            targetSpan.classList.add('active');
+        }
+    });
+}
+  document.addEventListener("DOMContentLoaded", () => {
+    window.swup = new Swup();
+swup.hooks.on('content:replace', () => {
+fixPaperModMenuHighlight();
+   if (window.MathJax && window.MathJax.typesetPromise) {
+        const content = document.querySelector('#swup');
+        window.MathJax.typesetPromise([content]);
+    }
+if (typeof window.initDesmosInstances === 'function') {
+        window.initDesmosInstances();
+    }
+if (typeof window.initCopyCode === 'function') {
+        window.initCopyCode();
+    }
+if (typeof window.initPaperModSearch === 'function') {
+window.initPaperModSearch();
+    }
+});
+        window.initPaperModSearch();
+
+  });
+</script>
+
+<style>
+.main {
+  transition: 0.4s;
+  opacity: 1;
+}
+
+html.is-animating .main {
+  opacity: 0;
+  transform: translateY(10px);
+}
+</style>
