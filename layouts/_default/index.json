@@ -1,0 +1,7 @@
+{{- $index := slice -}}
+{{- /* 只索引当前语言的文章 */ -}}
+{{- range (where .Site.RegularPages "Lang" .Lang) -}}
+    {{- $index = $index | append (dict "title" .Title "summary" .Summary "content" .Plain "permalink" .Permalink) -}}
+{{- end -}}
+{{- $index | jsonify -}}
+
