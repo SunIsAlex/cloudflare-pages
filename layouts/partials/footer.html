@@ -99,44 +99,4 @@
 </script>
 {{- end }}
 
-{{- if (and (eq .Kind "page") (ne .Layout "archives") (ne .Layout "search") (.Param "ShowCodeCopyButtons")) }}
-<script>
-// 1. 封装成全局函数
-window.initCopyCode = function() {
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-        
-        // 防止 SPA 模式下重复添加按钮
-        if (container.querySelector('.copy-code')) return;
 
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerText = '{{- i18n "code_copy" | default "copy" -}}';
-
-        copybutton.addEventListener('click', () => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copybutton.innerText = '{{- i18n "code_copied" | default "copied!" -}}';
-                setTimeout(() => {
-                    copybutton.innerText = '{{- i18n "code_copy" | default "copy" -}}';
-                }, 2000);
-            }
-        });
-
-        // 适配 PaperMod 的多种代码块结构
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-}
-
-// 2. 初始页面加载执行
-initCopyCode();
-
-
-</script>
-{{- end }}

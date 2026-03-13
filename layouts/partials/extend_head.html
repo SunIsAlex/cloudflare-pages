@@ -3,6 +3,8 @@
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 {{- /* Head custom content area end */ -}}
 <script src="https://cdn.bootcdn.net/ajax/libs/swup/4.8.2/Swup.umd.min.js"></script>
+{{- /* Search */}}
+{{- if (eq .Layout `search`) -}}
 <link crossorigin="anonymous" rel="preload" as="fetch" href="../index.json">
 {{- $fastsearch := resources.Get "js/fastsearch.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify }}
 {{- $fusejs := resources.Get "js/fuse.basic.min.js" }}
@@ -14,6 +16,7 @@
 {{- $search := (slice $fusejs $fastsearch ) | resources.Concat "assets/js/search.js" }}
 <script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}"></script>
 {{- end }}
+{{- end -}}
 <script>
 function fixPaperModMenuHighlight() {
     // 获取当前规范化的路径 (确保结尾有斜杠，匹配 PaperMod 的 $menu_item_url 逻辑)
