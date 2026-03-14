@@ -5,18 +5,18 @@ draft : false
 title : '有机化学补全计划:2024北京卷'
 ---
 
-![2024北京卷有机](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMSaaWOJqSE_ymf7O1RkLT7ePcZETYAAqELaxvUfzBFNi6OruCJ0dgBAAMCAAN5AAM6BA.png)
+![2024北京卷有机](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMSaaWOJqSE_ymf7O1RkLT7ePcZETYAAqELaxvUfzBFNi6OruCJ0dgBAAMCAAN5AAM6BA.png)
 
-![综合推断](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMTaaWQmIoPK1nDqqTsvg-AHEq_tcMAAqILaxvUfzBFyx00Zc_T2lkBAAMCAAN4AAM6BA.png)
+![综合推断](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMTaaWQmIoPK1nDqqTsvg-AHEq_tcMAAqILaxvUfzBFyx00Zc_T2lkBAAMCAAN4AAM6BA.png)
 
 J->K发生了**克莱森酯缩合反应**(Claisen Condensation)
-![Claisen Condensation1](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMUaaWRLPix02zA-JfS9Z7zA5_1Pw0AAqMLaxvUfzBFvGlqq8yi1H4BAAMCAAN3AAM6BA.png)
+![Claisen Condensation1](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMUaaWRLPix02zA-JfS9Z7zA5_1Pw0AAqMLaxvUfzBFvGlqq8yi1H4BAAMCAAN3AAM6BA.png)
 这里的一定条件就是**醇钠**(最后一步形成烯醇盐的质子转移是不可逆的)
-![Claisen Condensation2](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMVaaWR4-EBY9MWZu4V2DwMvZG96fEAAqQLaxvUfzBFJnjPFf2JDP4BAAMCAAN5AAM6BA.png)
-![Claisen Condensation3](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMWaaWSEpQjKwRsQPAdtFy34sYEq74AAqULaxvUfzBFzk-jThOqK_MBAAMCAAN5AAM6BA.png)
+![Claisen Condensation2](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMVaaWR4-EBY9MWZu4V2DwMvZG96fEAAqQLaxvUfzBFJnjPFf2JDP4BAAMCAAN5AAM6BA.png)
+![Claisen Condensation3](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMWaaWSEpQjKwRsQPAdtFy34sYEq74AAqULaxvUfzBFzk-jThOqK_MBAAMCAAN5AAM6BA.png)
 为什么信息反应没有副产物?因为三氟乙酸乙酯**没有α-H**,无法形成碳负离子
 
-![综合推断](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMTaaWQmIoPK1nDqqTsvg-AHEq_tcMAAqILaxvUfzBFyx00Zc_T2lkBAAMCAAN4AAM6BA.png)
+![综合推断](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMTaaWQmIoPK1nDqqTsvg-AHEq_tcMAAqILaxvUfzBFyx00Zc_T2lkBAAMCAAN4AAM6BA.png)
 
 然后,$(NH_4)_2SO_4$中游离的$NH_3$对羰基进行**亲核进攻**(三氟甲基增加了羰基碳的正电性,从而增加了其亲电性),形成四面体中间体,然后脱水形成**亚胺**(=N)结构.为了形成共轭体系,亚胺互变异构成为**烯胺**(L).
 

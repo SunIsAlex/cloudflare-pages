@@ -10,11 +10,11 @@ tags : ['数学','常用技巧','导数']
 \( \ln (1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots + (-1)^{n-1} \frac{x^n}{n} + o(x^n) \)
 需要注意的是,此公式具有收敛半径$R=1$,仅适用于$x\approx 0$的情况.
 
-具体内容,可以见[浅谈泰勒展开与高考数学](https://www.alexsun.one/posts/math/taylor-expansion/).
+具体内容,可以见[浅谈泰勒展开与高考数学](https://www.sunisalex.org/posts/math/taylor-expansion/).
 # 帕德逼近(※)
 
 以下是[维基百科](https://zh.wikipedia.org/zh-sg/%E5%B8%95%E5%BE%B7%E8%BF%91%E4%BC%BC)给出的简介,这里不加赘述.
-![Wikipedia](https://img.alexsun.one/file/AgACAgEAAyEGAATlvtEQAAMeaal9j4ifvzXpCZbNC-5wPK-cSREAAukLaxuKrkhFJmRRegg0MOEBAAMCAAN3AAM6BA.png)
+![Wikipedia](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMeaal9j4ifvzXpCZbNC-5wPK-cSREAAukLaxuKrkhFJmRRegg0MOEBAAMCAAN3AAM6BA.png)
 
 总之,一般在**主对角线**[n,n]上(或附近)的**帕德逼近**比较精确.
 [1, 1] 阶:$$\ln(1+x) \approx \frac{x + \frac{1}{2}x^2}{1 + x} \quad \text{或者更常用的形式：} \quad \frac{2x}{x+2}$$(注：$\frac{2x}{x+2}$ 实际上是 $\ln(\frac{1+y}{1-y})$ 的变形，在 $x$ 较小时非常准)
