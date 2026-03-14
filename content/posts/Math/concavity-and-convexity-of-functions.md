@@ -6,61 +6,55 @@ title : '浅谈函数的凹凸性'
 categories : ['高联一试']
 tags : ['导数']
 ---
+# 函数的凹凸性 (Convexity and Concavity)
 
-# 函数的凹凸性 (Convexity and Concavity of Functions)
+## 1. 基于二阶导数的定义
 
-## 1. 基于二阶导数的定义 (Second Derivative Test)
+设函数 $f$ 在区间 $I$ 上二阶可导：
 
-设函数 \( f: I \subset \mathbb{R} \to \mathbb{R} \) 在区间 \( I \) 上二阶可导：
+- **凹函数 (Concave / 俗称上凸 $\cap$)** 如果 $f''(x) \le 0, \forall x \in I$，则称 $f$ 为**凹函数**。
+  其图形向上隆起，开口向下。
 
-- **上凸函数 (Convex Up / Concave)**  
-  如果
-  \[
-  f''(x) \ge 0, \quad \forall x \in I,
-  \]
-  则称 \( f \) 在 \( I \) 上是 **上凸 (convex up)** 或 **凹的 (concave)**。
+- **凸函数 (Convex / 俗称下凸 $\cup$)** 如果 $f''(x) \ge 0, \forall x \in I$，则称 $f$ 为**凸函数**。
+  其图形向下坠，开口向上。
 
-- **下凸函数 (Convex Down / Convex)**  
-  如果
-  \[
-  f''(x) \le 0, \quad \forall x \in I,
-  \]
-  则称 \( f \) 在 \( I \) 上是 **下凸 (convex down)** 或 **凸的 (convex)**。
-
-> 注：这里 \( f''(x) = 0 \) 时，函数可能是线性。
+>CZW(陈祖维)语录:想象眼睛从函数下方看，如果函数开口向下，那么就是凹函数
 
 ---
 
-## 2. 基于琴生不等式 (Jensen's Inequality)
+## 2. 基于切线位置的几何定义
 
-设 \( f: I \subset \mathbb{R} \to \mathbb{R} \) 是定义在凸集 \( I \) 上的函数：
+{{<notice info>}}
+巧用切线与函数的关系，可以在部分**凹凸性改变**的函数上使用“琴生不等式”
+{{</notice>}}
+- **凹函数 (Concave $\cap$):** 曲线始终位于其任意点切线的**下方**。
+  即：**切线在曲线上方**。
+  数学表示：$f(x) \le f(x_0) + f'(x_0)(x - x_0)$
 
-- **上凸函数 (Convex Up / Concave)**  
-  对任意 \( x_1, x_2 \in I \) 和 \( \lambda \in [0,1] \)：
-  \[
-  f(\lambda x_1 + (1-\lambda) x_2) \ge \lambda f(x_1) + (1-\lambda) f(x_2)
-  \]
-  则 \( f \) 是 **上凸 (convex up)** 或 **凹函数 (concave)**。
-
-- **下凸函数 (Convex Down / Convex)**  
-  对任意 \( x_1, x_2 \in I \) 和 \( \lambda \in [0,1] \)：
-  \[
-  f(\lambda x_1 + (1-\lambda) x_2) \le \lambda f(x_1) + (1-\lambda) f(x_2)
-  \]
-  则 \( f \) 是 **下凸 (convex down)** 或 **凸函数 (convex)**。
-
-> 这样表述时，二阶导与几何形状完全一致：上凸对应“像碗”，下凸对应“像帽子”。
+- **凸函数 (Convex $\cup$):** 曲线始终位于其任意点切线的**上方**。
+  即：**切线在曲线下方**。
+  数学表示：$f(x) \ge f(x_0) + f'(x_0)(x - x_0)$
 
 ---
 
-## 3. 对比总结 (Comparison)
+## 3. 基于琴生不等式 (割线定义)
 
-| 方法 (Method)         | 上凸函数条件 (Convex Up / Concave)     | 下凸函数条件 (Convex Down / Convex) | 注释 (Notes)                   |
-|----------------------|--------------------------------------|------------------------------------|--------------------------------|
-| 二阶导数 (2nd Derivative) | \( f''(x) \ge 0 \)                    | \( f''(x) \le 0 \)                 | 局部微分条件 (local)          |
-| 琴生不等式 (Jensen)   | \( f(\lambda x_1 + (1-\lambda)x_2) \ge \lambda f(x_1) + (1-\lambda) f(x_2) \) | \( f(\lambda x_1 + (1-\lambda)x_2) \le \lambda f(x_1) + (1-\lambda) f(x_2) \) | 全局几何条件 (global)         |
+- **凹函数 (Concave $\cap$):** $$f(\lambda x_1 + (1-\lambda)x_2) \ge \lambda f(x_1) + (1-\lambda)f(x_2)$$
+  连接曲线上两点的割线在**曲线下方**。
 
-我们采取**定义一**,将定义二作为**导出结论**
+- **凸函数 (Convex $\cup$):** $$f(\lambda x_1 + (1-\lambda)x_2) \le \lambda f(x_1) + (1-\lambda)f(x_2)$$
+  连接曲线上两点的割线在**曲线上方**。
+
+---
+
+## 4. 总结对比表
+
+| 术语 (国际标准) | 形状 | 二阶导 | 切线位置 | 割线位置 |
+| :--- | :---: | :--- | :--- | :--- |
+| **Concave (凹)** | $\cap$ | $f'' \le 0$ | **在曲线上方** | 在曲线下方 |
+| **Convex (凸)** | $\cup$ | $f'' \ge 0$ | **在曲线下方** | 在曲线上方 |
+
+我们采取**定义一**,将定义三作为**导出结论**
 
 # 利用二阶导数证明琴生不等式 (Jensen's Inequality)
 
@@ -108,7 +102,7 @@ $$F(x_2) \le F(x_1) = 0$$
 代入 $F(x)$ 的定义式并移项，得证：
 $$f(\lambda x_1 + (1-\lambda)x_2) \le \lambda f(x_1) + (1-\lambda)f(x_2)$$
 等号成立时当且仅当$x_1=x_2$
-# 利用 $n=2$ 结论证明 $n$ 元琴生不等式
+## 利用 $n=2$ 结论证明 $n$ 元琴生不等式
 
 ### 1. 前提结论（已证）
 已知对于 $f''(x) > 0$ 的凸函数，二元琴生不等式成立：
