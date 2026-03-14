@@ -6,59 +6,61 @@ title : '浅谈函数的凹凸性'
 categories : ['高联一试']
 tags : ['导数']
 ---
-
 # 函数的凹凸性 (Convexity and Concavity of Functions)
 
 ## 1. 基于二阶导数的定义 (Second Derivative Test)
 
-设函数 \( f: I \subset \mathbb{R} \to \mathbb{R} \) 在区间 \( I \) 上二阶可导：
+设函数 $f: I \subset \mathbb{R} \to \mathbb{R}$ 在区间 $I$ 上二阶可导：
 
-- **上凸函数 (Convex Up / Concave)**  
-  如果
-  \[
-  f''(x) \ge 0, \quad \forall x \in I,
-  \]
-  则称 \( f \) 在 \( I \) 上是 **上凸 (convex up)** 或 **凹的 (concave)**。
+- **上凸函数 (Convex Up / Concave)** 如果
+  $$f''(x) \ge 0, \quad \forall x \in I,$$
+  则称 $f$ 在 $I$ 上是 **上凸 (convex up)** 或 **凹的 (concave)**。
 
-- **下凸函数 (Convex Down / Convex)**  
-  如果
-  \[
-  f''(x) \le 0, \quad \forall x \in I,
-  \]
-  则称 \( f \) 在 \( I \) 上是 **下凸 (convex down)** 或 **凸的 (convex)**。
+- **下凸函数 (Convex Down / Convex)** 如果
+  $$f''(x) \le 0, \quad \forall x \in I,$$
+  则称 $f$ 在 $I$ 上是 **下凸 (convex down)** 或 **凸的 (convex)**。
 
-> 注：这里 \( f''(x) = 0 \) 时，函数可能是线性。
+> 注：这里 $f''(x) = 0$ 时，函数可能是线性。
 
 ---
 
 ## 2. 基于琴生不等式 (Jensen's Inequality)
 
-设 \( f: I \subset \mathbb{R} \to \mathbb{R} \) 是定义在凸集 \( I \) 上的函数：
+设 $f: I \subset \mathbb{R} \to \mathbb{R}$ 是定义在凸集 $I$ 上的函数：
 
-- **上凸函数 (Convex Up / Concave)**  
-  对任意 \( x_1, x_2 \in I \) 和 \( \lambda \in [0,1] \)：
-  \[
-  f(\lambda x_1 + (1-\lambda) x_2) \ge \lambda f(x_1) + (1-\lambda) f(x_2)
-  \]
-  则 \( f \) 是 **上凸 (convex up)** 或 **凹函数 (concave)**。
+- **上凸函数 (Convex Up / Concave)** 对任意 $x_1, x_2 \in I$ 和 $\lambda \in [0,1]$：
+  $$f(\lambda x_1 + (1-\lambda) x_2) \ge \lambda f(x_1) + (1-\lambda) f(x_2)$$
+  则 $f$ 是 **上凸 (convex up)** 或 **凹函数 (concave)**。
 
-- **下凸函数 (Convex Down / Convex)**  
-  对任意 \( x_1, x_2 \in I \) 和 \( \lambda \in [0,1] \)：
-  \[
-  f(\lambda x_1 + (1-\lambda) x_2) \le \lambda f(x_1) + (1-\lambda) f(x_2)
-  \]
-  则 \( f \) 是 **下凸 (convex down)** 或 **凸函数 (convex)**。
-
-> 这样表述时，二阶导与几何形状完全一致：上凸对应“像碗”，下凸对应“像帽子”。
+- **下凸函数 (Convex Down / Convex)** 对任意 $x_1, x_2 \in I$ 和 $\lambda \in [0,1]$：
+  $$f(\lambda x_1 + (1-\lambda) x_2) \le \lambda f(x_1) + (1-\lambda) f(x_2)$$
+  则 $f$ 是 **下凸 (convex down)** 或 **凸函数 (convex)**。
 
 ---
 
-## 3. 对比总结 (Comparison)
+## 3. 基于切线位置的定义 (Tangential Property)
+{{< notice info >}}
+此方法可以加强琴生不等式(**拓宽变量范围**)
+{{< /notice >}}
+设函数 $f: I \subset \mathbb{R} \to \mathbb{R}$ 在区间 $I$ 上可导。通过比较曲线与其在任意点 $x_0 \in I$ 处的切线 $L(x) = f(x_0) + f'(x_0)(x - x_0)$ 的相对位置来定义：
 
-| 方法 (Method)         | 上凸函数条件 (Convex Up / Concave)     | 下凸函数条件 (Convex Down / Convex) | 注释 (Notes)                   |
-|----------------------|--------------------------------------|------------------------------------|--------------------------------|
-| 二阶导数 (2nd Derivative) | \( f''(x) \ge 0 \)                    | \( f''(x) \le 0 \)                 | 局部微分条件 (local)          |
-| 琴生不等式 (Jensen)   | \( f(\lambda x_1 + (1-\lambda)x_2) \ge \lambda f(x_1) + (1-\lambda) f(x_2) \) | \( f(\lambda x_1 + (1-\lambda)x_2) \le \lambda f(x_1) + (1-\lambda) f(x_2) \) | 全局几何条件 (global)         |
+- **上凸函数 (Convex Up / Concave)** 如果曲线始终位于切线的**上方**（或重合）：
+  $$f(x) \ge f(x_0) + f'(x_0)(x - x_0), \quad \forall x, x_0 \in I$$
+  则称 $f$ 是 **上凸 (convex up)** 或 **凹函数 (concave)**。
+
+- **下凸函数 (Convex Down / Convex)** 如果曲线始终位于切线的**下方**（或重合）：
+  $$f(x) \le f(x_0) + f'(x_0)(x - x_0), \quad \forall x, x_0 \in I$$
+  则称 $f$ 是 **下凸 (convex down)** 或 **凸函数 (convex)**。
+
+---
+
+## 4. 对比总结 (Comparison)
+
+| 方法 (Method) | 上凸函数条件 (Convex Up / Concave) | 下凸函数条件 (Convex Down / Convex) | 注释 (Notes) |
+| :--- | :--- | :--- | :--- |
+| **二阶导数** | $f''(x) \ge 0$ | $f''(x) \le 0$ | 局部微分条件 |
+| **琴生不等式** | $f(\text{内分点}) \ge \text{函数值的内分}$ | $f(\text{内分点}) \le \text{函数值的内分}$ | 割线在曲线下方/上方 |
+| **切线位置** | $f(x) \ge \text{切线函数}$ | $f(x) \le \text{切线函数}$ | 曲线在切线上方/下方 |
 
 我们采取**定义一**,将定义二作为**导出结论**
 
@@ -154,11 +156,31 @@ $$f\left( \sum_{i=1}^n \lambda_i x_i \right) \le \sum_{i=1}^{n-1} \lambda_i f(x_
 1. 对于上凸函数,自变量**集中**时函数值会比较**大**,自变量**分散**时函数值会比较**小**
 2. 下凸函数,Vice Versa
 
-举个例子具体说明一下:
+以下两种情况琴生不等式适用:
+1.  化乘法为加法(取对数)
+2.  变量分离(单元函数)
+
+举些例子具体说明一下:
 
 ### 小试牛刀
+1.设$A=\sqrt[3]{3-\sqrt[3]{3}}+\sqrt[3]{3+\sqrt[3]{3}},B=2\sqrt[3]{3}$,比较A,B大小.
+$B\gt A$,证明从略
 
-(2022北京卷)已知函数 $f(x) = e^x \ln(1 + x)$．
+2.$A,B,C为三角形的内角,证明:sinA+sinB+sinC\ge \frac{3\sqrt{3}}{2}$
+
+3.$A,B,C$为锐角三角形的内角,证明:
+
+(1)$cosA+cosB+cosC\le \frac{3}{2}$
+(2)$tanA+tanB+tanC\ge 3\sqrt{3}$
+
+4.用**广义**琴生不等式证明**广义**均值不等式:
+
+$\sum_{i=1}^n \lambda_i = 1,\lambda_i\ge 0,a_i\ge0,则\prod_{i=1}^n a_i^{\lambda_i}\le \sum_{i=1}^n a_i\lambda_i$
+
+提示:$f(x)=\ln x$
+### 渐入佳境
+
+1.(2022北京)已知函数 $f(x) = e^x \ln(1 + x)$．
 
 （Ⅰ）求曲线 $y = f(x)$ 在点 $(0, f(0))$ 处的切线方程；
 
@@ -168,8 +190,11 @@ $$f\left( \sum_{i=1}^n \lambda_i x_i \right) \le \sum_{i=1}^{n-1} \lambda_i f(x_
 
 解析:注意到$f(0)=0$,所以(II)等价于$f(0) + f(s + t) > f(s) + f(t)$
 相当于自变量越分散,函数值越大,这是**下凸函数**的特征.
+
 $f'(x)=e^x(\ln(x+1)+\cfrac{1}{x+1})$
+
 $f''(x)=e^x(\ln(x+1)+\cfrac{2}{x+1}-\cfrac{1}{(x+1)^2})=e^x(\ln(x+1)+\cfrac{2x+1}{(x+1)^2})\gt 0(x\ge 0)$
+
 剩下的仿照琴生不等式**主元法**证明,洒洒水的事:
 
 令 $m(x) = f(x+t) - f(x) - f(t) \quad (x > 0)$,
@@ -186,14 +211,12 @@ $f''(x)=e^x(\ln(x+1)+\cfrac{2}{x+1}-\cfrac{1}{(x+1)^2})=e^x(\ln(x+1)+\cfrac{2x+1
 
 所以 $f(s+t) > f(s) + f(t)$ 成立.
 
-### 渐入佳境
+事实上,根据二元均值不等式,有:
 
-1.设$A=\sqrt[3]{3-\sqrt[3]{3}}+\sqrt[3]{3+\sqrt[3]{3}},B=2\sqrt[3]{3}$,比较A,B大小.
-$B\gt A$,证明从略
+$f(s+t) > f(s) + f(t) \ge f(\frac{s+t}{2}) (当且仅当s=t时取等)$
 
 2.已知正数$a_i(i=1,2,...,n)满足\sum^{n}_{i=1}{a_i}=1,求证\prod^{n}_{i=1}{a_i+\frac{1}{a_i}}\ge(n+\frac{1}{n})^n$
 
-以下是将图片中的两种证法整理后的 Markdown 代码。
 
 ### 证法一：教科书解析版
 
@@ -252,3 +275,22 @@ $$\prod_{i=1}^{n} (a_i + \frac{1}{a_i}) \geqslant (n + \frac{1}{n})^n$$
 
 
 证毕。
+
+一般来说,往往**取倒数**或**取相反数**可以改变不等号的方向:
+
+3.(北大保送生考试)已知正实数$b_1,b_2,...,b_n$满足$\sum_{i=1}^n b_i=1$,证明:
+
+$$ \frac{1}{n}\le \prod_{i=1}^n b_i^{b_i}\le \sum_{i=1}^n b_i^2$$
+
+首先注意到取等条件是**变量全部相等**,显然需要**取自然对数**.
+
+$$ -\ln n\le \sum_{i=1}^n(b_i\ln b_i)\le \ln(\sum_{i=1}^n b_i^2)$$
+
+右边是好证的,使用**广义琴生不等式**即可.
+
+左边可以用$f(x)=x\ln x$的**琴生不等式**证明,但实际上不必如此繁,**取相反数**后相当于:
+
+$$\ln n\ge \sum_{i=1}^n(b_i\ln \frac{1}{b_i})$$
+
+其实就是$f(x)=\ln x$的琴生不等式(但是不等号方向发生了改变)
+
