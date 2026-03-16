@@ -1,6 +1,6 @@
-baseURL = 'https://www.alexsun.one'
-languageCode = 'en-us'
-title = "Alex's site"
+baseURL = 'https://www.sunisalex.org'
+languageCode = 'zh-CN'
+title = "∇Alex的实验室"
 
 theme = 'hugo-PaperMod'
 hasCJKLanguage = true
