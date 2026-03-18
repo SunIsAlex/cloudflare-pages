@@ -21,7 +21,7 @@ grep wp-admin /var/log/nginx/access.log | cat -n
 73  172.71.184.188 - - [05/Feb/2026:10:49:11 +0800] "GET /wp-admin/setup-config.php HTTP/1.1" 444 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
 ```
 我的站点上并没有安装WordPress，以上73条访问日志来自于***恶意扫描***[^1]
-![IP信息](/images/69840e9e9cc7c.png)
+![IP信息](https://free.picui.cn/free/2026/02/05/69840e9e9cc7c.png)
 
 用nginx的location可以配置路由，实现对恶意扫描的处理：
 ```

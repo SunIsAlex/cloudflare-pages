@@ -6,7 +6,7 @@ title : '浅谈泰勒展开与高考数学'
 categories: ['高考数学']
 tags: ['导数']
 cover :
-   image: '/images/AgACAgEAAyEGAATlvtEQAAMEaZ7DPsesCdz-WKPDRVt395X2u5sAAp0LaxtpMvlEXE1vShVv74oBAAMCAAN5AAM6BA.jpeg'
+   image: 'https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMEaZ7DPsesCdz-WKPDRVt395X2u5sAAp0LaxtpMvlEXE1vShVv74oBAAMCAAN5AAM6BA.jpeg'
 ---
 
 # 泰勒公式

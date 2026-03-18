@@ -26,4 +26,4 @@ D. D
 重点关注选项D
 
 《化学原理选讲》—严常申
-![图片](/images/AgACAgEAAxkDAAMGaZSE9eN_VIi_tsQnoWVIP6obek4AAroMaxuyQaFEH9EfWUmrTdABAAMCAAN5AAM6BA.jpg)
+![乙酸乙酯的水溶性](https://cdn.sunisalex.org/file/AgACAgEAAxkDAAMGaZSE9eN_VIi_tsQnoWVIP6obek4AAroMaxuyQaFEH9EfWUmrTdABAAMCAAN5AAM6BA.jpg)

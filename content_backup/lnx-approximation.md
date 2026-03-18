@@ -14,7 +14,7 @@ tags : ['数学','常用技巧','导数']
 # 帕德逼近(※)
 
 以下是[维基百科](https://zh.wikipedia.org/zh-sg/%E5%B8%95%E5%BE%B7%E8%BF%91%E4%BC%BC)给出的简介,这里不加赘述.
-![图片](/images/AgACAgEAAyEGAATlvtEQAAMeaal9j4ifvzXpCZbNC-5wPK-cSREAAukLaxuKrkhFJmRRegg0MOEBAAMCAAN3AAM6BA.png)
+![Wikipedia](https://cdn.sunisalex.org/file/AgACAgEAAyEGAATlvtEQAAMeaal9j4ifvzXpCZbNC-5wPK-cSREAAukLaxuKrkhFJmRRegg0MOEBAAMCAAN3AAM6BA.png)
 
 总之,一般在**主对角线**[n,n]上(或附近)的**帕德逼近**比较精确.
 [1, 1] 阶:$$\ln(1+x) \approx \frac{x + \frac{1}{2}x^2}{1 + x} \quad \text{或者更常用的形式：} \quad \frac{2x}{x+2}$$(注：$\frac{2x}{x+2}$ 实际上是 $\ln(\frac{1+y}{1-y})$ 的变形，在 $x$ 较小时非常准)

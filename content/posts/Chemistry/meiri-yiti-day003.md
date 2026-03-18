@@ -16,8 +16,8 @@ tags : ['有机']
 3.反应活性:酰卤 > 酸酐 > 酯 ≈ 羧酸 > 酰胺
 
 以下图片摘自[Clayden有机化学](http://clayden.lawaxi.net/)第十章:
-[![20260214-Clayden-pKa与离去能力.png](https://free.picui.cn/free/2026/02/14/6990400828d96.png)](https://free.picui.cn/free/2026/02/14/6990400828d96.png)
+[![20260214-Clayden-pKa与离去能力.png](/images/6990400828d96.png)](https://free.picui.cn/free/2026/02/14/6990400828d96.png)
 
-[![20260214-Clayden-羧酸衍生物的活泼性-1.png](https://free.picui.cn/free/2026/02/14/6990400778234.png)](https://free.picui.cn/free/2026/02/14/6990400778234.png)
+[![20260214-Clayden-羧酸衍生物的活泼性-1.png](/images/6990400778234.png)](https://free.picui.cn/free/2026/02/14/6990400778234.png)
 
-[![20260214-Clayden-羧酸衍生物的活泼性-2.png](https://free.picui.cn/free/2026/02/14/699040074569f.png)](https://free.picui.cn/free/2026/02/14/699040074569f.png)
+[![20260214-Clayden-羧酸衍生物的活泼性-2.png](/images/699040074569f.png)](https://free.picui.cn/free/2026/02/14/699040074569f.png)
