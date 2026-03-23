@@ -4,7 +4,9 @@
   <link rel="preload" href="https://registry.npmmirror.com/mathjax/4.1.1/files/ui/lazy.js" as="script">
 <script>
 window.MathJax = {
-
+  startup: {  
+    polyfillHasOwn: false,  
+  },
   options: {
     processHtmlClass: "math",
     lazyMargin: '200px',
