@@ -19,21 +19,7 @@
 {{- partialCached "smart_hide.html" . -}}
 {{- partial "head.html" . }}
 </head>
-{{ $js := resources.Get "js/quicklink.umd.js" }}
-{{ if $js }}
-  {{/* 如果你想压缩或添加指纹（Fingerprint）以利用 EdgeOne 的缓存加速 */}}
-  {{ $secureJS := $js | resources.Minify | resources.Fingerprint }}
-  <script defer src="{{ $secureJS.RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}"></script>
-{{ end }}
-<script>
-window.addEventListener('load', () => {
-quicklink.listen({
-  ignores: [
-    /#.*$/  // 忽略所有带 # 的链接
-  ]
-});
-});
-</script>
+
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
 <body class="list" id="top">
 {{- else }}
