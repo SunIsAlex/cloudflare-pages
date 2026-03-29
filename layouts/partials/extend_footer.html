@@ -46,7 +46,8 @@ window.initDesmosInstances = window.initDesmosInstances || function() {
         
         const calc = Desmos.GraphingCalculator(container, {
             expressions: true,
-            zoomButtons: true,
+	    settingsMenu: false,
+            zoomButtons: false,
             expressionsTopbar: true
         });
 
