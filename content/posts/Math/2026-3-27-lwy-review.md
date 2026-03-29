@@ -228,8 +228,8 @@ $3^\pi\gt \pi^3\gt e^\pi\gt \pi^e\gt e^3\gt 3^e$
     - \(\cfrac{1}{2}(x-\cfrac{1}{x})\lt lnx\lt \cfrac{2(x-1)}{x+1},x\lt 1\)
     - \(\cfrac{1}{2}(x-\cfrac{1}{x})\gt lnx\gt \cfrac{2(x-1)}{x+1},x\gt 1\)
 5.  飘带变形
-    - $\ln(x+1)\gt \frac{1}{2}(x+\frac{x}{x+1})(-1<x<0)$
-    - $\ln(x+1)\lt \frac{1}{2}(x+\frac{x}{x+1})(x>0)$
+    - $\ln(x+1)\gt \frac{1}{2}(x+\frac{x}{x+1})(-1\lt x\lt0)$
+    - $\ln(x+1)\lt \frac{1}{2}(x+\frac{x}{x+1})(x\gt 0)$
 
 运用以上的函数不等式,可以证明一些求和不等式.
 
