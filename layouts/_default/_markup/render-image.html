@@ -1,29 +1,55 @@
 {{- $u := urls.Parse .Destination -}}
 {{- $src := $u.String -}}
+
+{{- /* 优先从 Page Resources（Page Bundle）中获取图片 */ -}}
+{{- $resource := "" -}}
 {{- if not $u.IsAbs -}}
-{{- $path := strings.TrimPrefix "./" $u.Path }}
-{{- with or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
-{{- $src = .RelPermalink -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- $resource = or (.PageInner.Resources.Get $path) (.Page.Resources.Get $path) (.Page.Resources.GetMatch $path) -}}
+{{- end -}}
+
+{{- /* 如果找到了 Page Resource，则使用它的 RelPermalink，否则 fallback 到静态资源 */ -}}
+{{- if $resource -}}
+  {{- $src = $resource.RelPermalink -}}
+{{- else if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- with resources.Get $path -}}
+    {{- $src = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* 处理查询参数和锚点 */ -}}
 {{- with $u.RawQuery -}}
-{{- $src = printf "%s?%s" $src . -}}
+  {{- $src = printf "%s?%s" $src . -}}
 {{- end -}}
 {{- with $u.Fragment -}}
-{{- $src = printf "%s#%s" $src . -}}
+  {{- $src = printf "%s#%s" $src . -}}
 {{- end -}}
-{{- end -}}
-{{- end -}}
-{{- $attributes := merge .Attributes (dict "alt" .Text "src" $src "title" (.Title | transform.HTMLEscape) "loading"
-"lazy") -}}
+
+{{- $attributes := merge .Attributes (dict 
+  "alt" .Text 
+  "src" $src 
+  "title" (.Title | transform.HTMLEscape) 
+  "loading" "lazy"
+) -}}
+
 <figure class="img-wrapper">
   <a href="{{ $src }}" target="_blank" rel="noopener">
-
     <div class="loading-spinner"></div>
-    <img {{- range $k, $v :=$attributes -}} {{- if $v -}} {{- printf " %s=%q" $k $v | safeHTMLAttr -}} {{- end -}} {{-
-      end -}} onload="this.style.opacity=1; this.previousElementSibling.style.display='none';">
+    <img
+      {{- range $k, $v := $attributes -}}
+        {{- if $v -}}
+          {{- printf " %s=%q" $k $v | safeHTMLAttr -}}
+        {{- end -}}
+      {{- end -}}
+      style="opacity: 0; transition: opacity 0.4s ease;"
+      onload="this.style.opacity='1'; 
+              if (this.previousElementSibling &amp;&amp; this.previousElementSibling.classList.contains('loading-spinner')) {
+                this.previousElementSibling.style.display='none';
+              }">
   </a>
-  {{- /* 如果 Markdown 中写了 title，则显示为标题 */ -}}
+
   {{- with .Title -}}
-  <figcaption class="img-caption">{{ . | transform.HTMLEscape }}</figcaption>
+    <figcaption class="img-caption">{{ . | transform.HTMLEscape }}</figcaption>
   {{- end -}}
 </figure>
-{{- /**/ -}}
