@@ -2,7 +2,8 @@
 weight : 1000
 date : '2026-03-31T21:25:30+08:00'
 draft : false
-title : 'Day001'
+title : '外刊阅读-001'
+categoires: ["外刊阅读"]
 ---
 # Meta apps hurt children
 [News in Levels原文章](https://www.newsinlevels.com/products/meta-apps-hurt-children-level-3/)
