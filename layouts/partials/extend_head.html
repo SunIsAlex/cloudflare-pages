@@ -18,6 +18,18 @@ resources.Minify }}
 <script defer crossorigin="anonymous" src="{{ $search.RelPermalink }}"></script>
 {{- end }}
 <script>
+function loadBusuanzi() {
+  // 删除旧 script（防止重复）
+  const oldScript = document.querySelector('script[src*="busuanzi"]');
+  if (oldScript) oldScript.remove();
+
+  // 创建新 script
+  const script = document.createElement('script');
+  script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+  script.async = true;
+
+  document.body.appendChild(script);
+}
     function fixPaperModMenuHighlight() {
         // 获取当前规范化的路径 (确保结尾有斜杠，匹配 PaperMod 的 $menu_item_url 逻辑)
         let currentPath = window.location.pathname;
@@ -67,7 +79,8 @@ resources.Minify }}
         });
         swup.hooks.on('content:replace', () => {
             fixPaperModMenuHighlight();
-            if (window.MathJax && window.MathJax.typesetPromise) {
+	loadBusuanzi(); 
+           if (window.MathJax && window.MathJax.typesetPromise) {
                 const content = document.querySelector('#swup');
                 window.MathJax.typesetPromise([content]);
             }
