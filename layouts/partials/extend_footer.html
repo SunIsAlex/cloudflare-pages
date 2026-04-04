@@ -50,7 +50,7 @@ window.initDesmosInstances = window.initDesmosInstances || function() {
             expressionsTopbar: true
         });
 
-        const funcs = container.dataset.funcs.split(/[\s\|\,]+/).filter(s => s.trim());
+        const funcs = container.dataset.funcs.split("|").filter(s => s.trim());
         const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"];
 
         funcs.forEach((latex, i) => {
