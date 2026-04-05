@@ -25,8 +25,12 @@
       {{- partial "translation_list.html" . -}}
       {{- partial "edit_post.html" . -}}
       {{- partial "post_canonical.html" . -}}
-<span id="busuanzi_container_page_pv">
-  阅读量: <span id="busuanzi_value_page_pv"></span>
+<span style="display:none;" id="busuanzi_container_page_pv">
+    &emsp; 
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+    <circle cx="12" cy="12" r="3" fill="transparent"></circle>
+  </svg><span id="busuanzi_value_page_pv"></span>次
 </span>
     </div>
     {{- end }}
