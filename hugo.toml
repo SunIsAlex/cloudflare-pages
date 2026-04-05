@@ -1,4 +1,6 @@
-baseURL = 'https://www.sunisalex.org'
+baseURL = "/"
+relativeURLs = true
+canonifyURLs = false
 languageCode = 'zh-CN'
 title = "∇Alex的实验室"
 
