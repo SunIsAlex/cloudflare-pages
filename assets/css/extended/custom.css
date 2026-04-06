@@ -10,6 +10,7 @@ body {
 /*    background: radial-gradient(circle at 30% 20%, #0d1b2a 0%, #1b263b 40%, #415a77 100%);*/
 background: #252d38;
 }
+
 .header {
     background-color: rgba(var(--theme-rgb), 0.75) !important;  /* 75% 不透明度，基于主题背景色 */
     backdrop-filter: blur(10px);               /* 模糊半径 10px，调大更模糊 */
@@ -451,8 +452,7 @@ figure.img-wrapper figcaption {
 }
 
 .post-entry {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 1rem 0 !important;
+    
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    /*padding: 1rem 0 !important;*/
 }
