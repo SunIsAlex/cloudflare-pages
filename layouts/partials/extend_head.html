@@ -19,16 +19,25 @@ resources.Minify }}
 {{- end }}
 <script>
 function loadBusuanzi() {
-  // 删除旧 script（防止重复）
-  const oldScript = document.querySelector('script[src*="busuanzi"]');
-  if (oldScript) oldScript.remove();
+if(!document.getElementById("busuanzi_value_page_pv")) return;
+if (!window.bszCaller || !window.bszTag) return;
+  // 1. 清空旧值（关键）
+  bszTag.bszs.forEach(key => {
+    const el = document.getElementById("busuanzi_value_" + key);
+    if (el) el.innerHTML = "";
+  });
 
-  // 创建新 script
-  const script = document.createElement('script');
-  script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-  script.async = true;
-
-  document.body.appendChild(script);
+  // 2. 隐藏（避免闪烁）
+  bszTag.hides();
+  // 3. 重新请求
+  bszCaller.fetch(
+    "//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",
+    function (data) {
+alert(data);
+      bszTag.texts(data);
+      bszTag.shows();
+    }
+  );
 }
     function fixPaperModMenuHighlight() {
         // 获取当前规范化的路径 (确保结尾有斜杠，匹配 PaperMod 的 $menu_item_url 逻辑)
