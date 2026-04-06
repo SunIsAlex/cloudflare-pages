@@ -2,7 +2,7 @@
 weight : 1000
 date : '2026-04-03T20:48:40+08:00'
 draft : false
-title : '2024福建厦门三模导数'
+title : '变态难の对数Pade逼近'
 categories : ["高考数学"]
 tags : ["导数"]
 summary: "本文围绕对数函数 $\\ln x$ 与 $\\ln(1+x)$ 的 **Padé 逼近与不等式放缩** 展开，系统总结了一类高考常见的估值与比较技巧。"
