@@ -33,7 +33,6 @@ if (!window.bszCaller || !window.bszTag) return;
   bszCaller.fetch(
     "//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",
     function (data) {
-alert(data);
       bszTag.texts(data);
       bszTag.shows();
     }
