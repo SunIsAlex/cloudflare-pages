@@ -31,5 +31,9 @@
     </main>
     {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
 </body>
-
+<style>
+    #edgeone-watermark {
+        display: none;
+    }
+</style>
 </html>
