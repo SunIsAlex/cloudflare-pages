@@ -19,14 +19,30 @@
 {{- partialCached "smart_hide.html" . -}}
 {{- partial "head.html" . }}
 <script>
-  alert("hostname: " + window.location.hostname);
-  setTimeout(function() {
-    if (window.location.hostname.includes('edgeone.cool')) {
-      history.replaceState(null, '', 'https://cn.sunisalex.org' 
-        + window.location.pathname + window.location.search);
-      alert("改完了: " + window.location.href);
-    }
-  }, 2000);
+(function() {
+  const canonical = 'https://cn.sunisalex.org'
+                    + window.location.pathname;
+
+  // 在页面右下角插入一个小提示
+  const btn = document.createElement('div');
+  btn.innerHTML = `
+    <div style="position:fixed;bottom:20px;right:20px;background:#333;color:#fff;
+                padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;
+                z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.3)">
+      📋 复制分享链接
+    </div>`;
+  btn.onclick = function() {
+    navigator.clipboard.writeText(canonical).then(() => {
+      btn.querySelector('div').innerHTML = '✅ 已复制！';
+      setTimeout(() => btn.querySelector('div').innerHTML = '📋 复制分享链接', 2000);
+    });
+  };
+
+  // 只在 EO 域名下显示
+  if (window.location.hostname.includes('edgeone.cool')) {
+    document.body.appendChild(btn);
+  }
+})();
 </script>
 </head>
 
