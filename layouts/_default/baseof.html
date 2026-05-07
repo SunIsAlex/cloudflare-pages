@@ -19,8 +19,10 @@
 {{- partialCached "smart_hide.html" . -}}
 {{- partial "head.html" . }}
 <script>
+    alert("test");
   // 如果是从 EO 预览域名访问，把地址栏改成 cn.sunisalex.org
   if (window.location.hostname.includes('edgeone.cool')) {
+      alert("success");
     const canonical = 'https://cn.sunisalex.org'
                       + window.location.pathname
                       + window.location.search;
