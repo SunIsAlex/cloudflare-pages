@@ -30,7 +30,7 @@
         {{- block "main" . }}{{ end }}
     </main>
     {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
-<div id="eo-share-btn" style="display:none;position:fixed;bottom:20px;right:20px;background:#333;color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.3)"
+<div id="eo-share-btn" style="display:block;position:fixed;bottom:20px;right:20px;background:#333;color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.3)"
   onclick="navigator.clipboard.writeText('https://cn.sunisalex.org' + window.location.pathname).then(function(){this.textContent='✅ 已复制！';var t=this;setTimeout(function(){t.textContent='📋 复制分享链接';},2000)}.bind(this))">
   📋 复制分享链接
 </div>
